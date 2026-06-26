@@ -5,26 +5,254 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Pest Repeller — ultratovushli zararkunanda qaytargich. Rozetkaga ulang. Sprey, plastina yoki zahar kerak emas.">
   <meta name="theme-color" content="#1f232e">
+  <meta property="og:title" content="Pest Repeller — Ultratovushli zararkunanda qaytargich">
+  <meta property="og:description" content="Rozetkaga ulang. Sprey, plastina yoki zahar kerak emas.">
+  <meta property="og:image" content="/assets/og-image.png">
   <title>Pest Repeller — Ultratovushli zararkunanda qaytargich</title>
-  <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="/assets/styles.css?v=astro-2">
+  <script async src="https://connect.facebook.net/en_US/fbevents.js"></script>
+  <script>
+    fbq('init', '2935651803447339');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2935651803447339&ev=PageView&noscript=1" /></noscript>
 </head>
-<body>
+<body class="astro-body">
+  <a class="skip" href="#main">Asosiy mazmunga o'tish</a>
+
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="container">
       <div class="navbar-brand">
         <span class="logo-icon">◆</span>
         <span class="logo-text">Pest Repeller</span>
       </div>
+      <div class="navbar-links">
+        <a href="#how" class="nav-link">Qanday ishlaydi?</a>
+        <a href="#order" class="nav-link">Buyurtma berish</a>
+      </div>
     </div>
   </nav>
 
   <main id="main">
-    <section class="hero">
+    <!-- HERO -->
+    <section class="hero" id="hero">
       <div class="container">
-        <h1>Ultratovushli zararkunanda qaytargich</h1>
-        <p>Rozetkaga ulang. Sprey, plastina yoki zahar kerak emas.</p>
-        <img src="/assets/product-master.png" alt="Pest Repeller" class="product-image">
-        <button class="btn btn-primary">Buyurtma berish</button>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">Uy uchun bezovta qiluvchilarga qarshi</p>
+            <h1 class="hero-title">Ultratovushli<br>zararkunanda<br>qaytargich</h1>
+            <p class="hero-desc">Rozetkaga ulang. Sprey, plastina yoki zahar kerak emas. Natija xona va joylashuvga bog'liq.</p>
+            
+            <div class="price-card">
+              <div class="price-main">
+                <span class="price-label">Narx</span>
+                <span class="price-value">125 000 <small>so'm</small></span>
+              </div>
+              <ul class="price-terms">
+                <li>To'lov mahsulotni olganda</li>
+                <li>Oldindan to'lov yo'q</li>
+              </ul>
+            </div>
+
+            <div class="hero-cta">
+              <button class="btn btn-primary" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">Buyurtma berish</button>
+              <a href="#how" class="btn btn-secondary">Qanday ishlaydi?</a>
+            </div>
+
+            <ul class="hero-trust">
+              <li>⏱ Ishlatish uzluksiz</li>
+              <li>🍃 Kimyoviy emas</li>
+              <li>🔌 Faqat rozetka</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual">
+            <div class="product-card">
+              <img src="/assets/product-master.png" alt="Pest Repeller" class="product-image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+      <div class="container">
+        <h2 class="section-title">Uch oddiy qadam</h2>
+        <p class="section-desc">Murakkab o'rnatish yo'q. Quyidagi tartibga rioya qiling.</p>
+        
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>Rozetkaga ulang</h3>
+            <p>Qurilmani odatdagi 220 V uy rozetkasiga ulang. Qo'shimcha asbob yoki o'rnatish ishlari shart emas.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h3>Qurilma ultratovush chiqaradi</h3>
+            <p>Inson qulog'i sezmaydigan to'lqinlar bezovta qiluvchilarga ta'sir qilishi mumkin. Devor va qalin mebel signalni susaytiradi.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h3>Bezovtachilar uzoqlashadi</h3>
+            <p>Vaqt o'tishi bilan ular yashash hududidan chiqishga moyil bo'ladi. Natija xonaga, planirovkaga va to'g'ri joylashuvga bog'liq.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHERE TO USE -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Qayerda ishlatish mumkin</h2>
+        <div class="use-grid">
+          <div class="use-card">
+            <h3>Uy</h3>
+            <p>Oshxona, yotoqxona, mehmonxona</p>
+          </div>
+          <div class="use-card">
+            <h3>Omborxona</h3>
+            <p>Quruq mahsulot saqlanadigan joylar</p>
+          </div>
+          <div class="use-card">
+            <h3>Ofis</h3>
+            <p>Ish stoli, ko'rinmas burchaklar</p>
+          </div>
+          <div class="use-card">
+            <h3>Dala hovli</h3>
+            <p>Mavsumiy uy yoki bog' uchastka</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Afzalliklari</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <h3>Sprey va plastina shart emas</h3>
+            <p>Doimiy ravishda kimyoviy vositalar sotib olishingiz shart emas.</p>
+          </div>
+          <div class="benefit-card">
+            <h3>Hidi yo'q</h3>
+            <p>Xonada o'tkir kimyoviy hid qoldirmaydi.</p>
+          </div>
+          <div class="benefit-card">
+            <h3>Oson o'rnatish</h3>
+            <p>Faqat rozetkaga ulang — qo'shimcha sozlash kerak emas.</p>
+          </div>
+          <div class="benefit-card">
+            <h3>Ixcham korpus</h3>
+            <p>Devor rozetkasida ko'zga tashlanmaydi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLACEMENT -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">To'g'ri joylashtirish</h2>
+        <div class="placement-grid">
+          <div class="placement-col">
+            <h3>✓ To'g'ri</h3>
+            <ul>
+              <li>Ochiq, to'sib qo'yilmagan rozetkaga ulang</li>
+              <li>Yer sathidan 0.8–1.2 m balandlikda</li>
+              <li>Har bir alohida xona uchun alohida qurilma</li>
+              <li>Doim yoqilgan holatda saqlang</li>
+            </ul>
+          </div>
+          <div class="placement-col">
+            <h3>✗ Noto'g'ri</h3>
+            <ul>
+              <li>Mebel yoki parda ortiga yashirib qo'yish</li>
+              <li>Nam, hammomli yoki yog'ingarchilik tegadigan joyga ulash</li>
+              <li>Bitta qurilmadan butun uy uchun foydalanish</li>
+              <li>Bir necha kun ichida natija kutish</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Ko'p so'raladigan savollar</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Qurilma qanday ishlaydi?</summary>
+            <p>Qurilma rozetkaga ulanganda inson qulog'i sezmaydigan ultratovushli to'lqinlarni chiqaradi. Bu to'lqinlar atrofdagi hududda bezovta qiluvchilarni qaytarishga yordam beradi.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Natija qachon sezilishi mumkin?</summary>
+            <p>Vaqt joyga va xonaga bog'liq. Ba'zilar bir necha kun ichida o'zgarishni sezadi, boshqalarida bir necha hafta kerak bo'lishi mumkin.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Bitta qurilma nechta xonaga yetadi?</summary>
+            <p>Devor va qalin mebel ultratovush signalini susaytiradi, shuning uchun har bir alohida xona uchun alohida qurilma tavsiya etiladi.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Qurilmani qayerga o'rnatish kerak?</summary>
+            <p>Ochiq, hech narsa bilan to'sib qo'yilmagan rozetkaga ulang. Mebel ortiga yashirmang.</p>
+          </details>
+          <details class="faq-item">
+            <summary>U doim yoqilgan turishi kerakmi?</summary>
+            <p>Ha, doimiy ishlash tavsiya etiladi. Qurilma kam quvvat sarflaydi.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Yetkazib berish qancha vaqt oladi?</summary>
+            <p>O'zbekiston bo'ylab bir necha kun ichida yetkazib beriladi.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER FORM -->
+    <section class="section" id="order">
+      <div class="container">
+        <h2 class="section-title">Buyurtma berish</h2>
+        
+        <div class="order-grid">
+          <div class="order-form">
+            <form id="orderForm">
+              <div class="form-group">
+                <label for="nameInput">Ismingiz</label>
+                <input type="text" id="nameInput" placeholder="Masalan: Maftuna" required>
+                <small>Lotin yoki Kirill harflari, 2–40 ta belgi</small>
+              </div>
+
+              <div class="form-group">
+                <label for="phoneInput">Telefon raqamingiz</label>
+                <input type="tel" id="phoneInput" placeholder="90 123 45 67" required>
+                <small>Masalan: 90 123 45 67</small>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-large">Buyurtmani yuborish</button>
+            </form>
+
+            <div id="successPane" class="success-pane" style="display:none;">
+              <h3>✓ Ariza qabul qilindi</h3>
+              <p>Operator tez orada siz bilan bog'lanadi. Raxmat!</p>
+            </div>
+          </div>
+
+          <div class="order-info">
+            <div class="info-card">
+              <h3>Buyurtma jarayoni</h3>
+              <ol>
+                <li>Ariza qoldiring</li>
+                <li>Operator qo'ng'irog'i</li>
+                <li>Yetkazib berish</li>
+                <li>To'lov mahsulotni olganda</li>
+              </ol>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
