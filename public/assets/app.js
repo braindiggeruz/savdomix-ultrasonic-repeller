@@ -236,14 +236,13 @@
   }
 
   // --- Form validators -------------------------------------------
-  const NAME_RE = /^[A-Za-z\u02BB\u02BC\u2018\u2019' \-\u02B9]{2,40}$/;
-  const CYR_RE  = /[\u0400-\u04FF]/;
+  // Accept both Latin and Cyrillic Uzbek names
+  const MIXED_NAME_RE = /^[A-Za-z\u0400-\u04FF\u02BB\u02BC\u2018\u2019' \-\u02B9]{2,40}$/;
   function validateName(v) {
     const s = String(v || "").trim();
     if (s.length < 2) return { ok: false, code: "too_short", msg: "Iltimos, ismingizni kiriting." };
     if (s.length > 40) return { ok: false, code: "too_long", msg: "Ism juda uzun." };
-    if (CYR_RE.test(s)) return { ok: false, code: "cyrillic", msg: "Iltimos, ismingizni Lotin harflarida yozing." };
-    if (!NAME_RE.test(s)) return { ok: false, code: "invalid", msg: "Ismda faqat Lotin harflari, bo‘sh joy yoki tire bo‘lishi mumkin." };
+    if (!MIXED_NAME_RE.test(s)) return { ok: false, code: "invalid", msg: "Ismda faqat harflar, bo'sh joy yoki tire bo'lishi mumkin." };
     return { ok: true, value: s };
   }
   function validatePhoneDigits(d) {
@@ -366,7 +365,6 @@
           if (CONFIG.mock_mode || data.mode === "mock") {
             track("mock_buyo_accepted", { event_id: serverEid });
             track("mock_lead_would_fire", { event_id: serverEid });
-            $("#successMockNote").style.display = "block";
           } else {
             fireLead(serverEid);
             track("buyo_accepted", { event_id: serverEid });
