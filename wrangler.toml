@@ -13,7 +13,7 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "AUDIT_DB"
 database_name = "savdomix_audit"
-database_id = "REPLACE_WITH_REAL_D1_DB_ID"
+database_id = "44e46fb3-a8ef-47a5-95bf-838ca89b889d"
 
 # KV binding for short-lived idempotency tokens (optional but recommended)
 # [[kv_namespaces]]
