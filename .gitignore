@@ -1,0 +1,49 @@
+# Secrets — NEVER commit
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+.dev.vars
+
+# Node / Wrangler
+node_modules/
+.wrangler/
+dist/
+.cache/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Build artifacts
+build/
+*.log
+
+# Cloudflare local D1
+.d1/
+
+# Test artifacts
+test_reports/local/
+.pytest_cache/
+
+# Emergent dev workspace artifacts (not deployed to Cloudflare)
+/backend/__pycache__/
+/frontend/node_modules/
+/frontend/yarn-error.log
+# Emergent dev workspace — NOT deployed to Cloudflare
+/backend/
+/frontend/
+/tests/
+/plan.md
+/design_guidelines.md

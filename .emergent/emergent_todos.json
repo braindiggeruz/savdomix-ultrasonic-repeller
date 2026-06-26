@@ -1,0 +1,74 @@
+[
+  {
+    "content": "Phase 1: Create .env.local with BUYO/CF/GH secrets (gitignored, never logged)",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 1: Create test_core.py covering BUYO flows, phone, hashing, _fbc, event_id, CAPI validation",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 1: Run test_core.py and fix until all assertions pass (Flow ID confirmed: zra4weGe02NE for offer Otpugivatel Nasekomih)",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 1: All POC user stories covered",
+    "status": "completed"
+  },
+  {
+    "content": "Phase 2: Get design guidelines from design_agent",
+    "status": "in_progress"
+  },
+  {
+    "content": "Phase 2: Generate product images via vision_expert_agent",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Scaffold Cloudflare Pages project (/app/public, /app/functions, /app/schema, /app/wrangler.toml)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Build static landing /app/public/index.html (10 sections, Uzbek Latin, mobile-first)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Build Pages Functions (/app/functions/api/lead.js, config.js, track.js) + _shared modules",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Build D1 schema + audit logic (no raw PII)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: Configure Emergent preview mirror (Express static + FastAPI mirror)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: All user stories covered (US-P2-1 through US-P2-14)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 2: End-to-end testing via testing_agent_v3",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: Create GitHub repo + push via API",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: Create Cloudflare Pages project + D1 binding + deploy via API",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 3: Document env vars (names only) + rollback procedure",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4: Mobile QA + Lighthouse + creative pack (8 ads, Uzbek Latin)",
+    "status": "pending"
+  },
+  {
+    "content": "Phase 4: Final delivery report with all 20 required items",
+    "status": "pending"
+  }
+]

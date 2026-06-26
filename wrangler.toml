@@ -1,0 +1,45 @@
+# Cloudflare Pages — savdomix-ultrasonic-repeller
+# Production runtime: Cloudflare Pages + Pages Functions + D1.
+# Do NOT put secrets in this file. Configure them via Cloudflare dashboard or
+# `wrangler pages secret put` (server-side only).
+
+name = "savdomix-ultrasonic-repeller"
+pages_build_output_dir = "public"
+compatibility_date = "2026-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 binding for the sanitized audit log (no raw PII stored).
+# Owner must create the D1 database and replace database_id during setup.
+[[d1_databases]]
+binding = "AUDIT_DB"
+database_name = "savdomix_audit"
+database_id = "REPLACE_WITH_REAL_D1_DB_ID"
+
+# KV binding for short-lived idempotency tokens (optional but recommended)
+# [[kv_namespaces]]
+# binding = "IDEMPOTENCY_KV"
+# id = "REPLACE_WITH_KV_ID"
+
+# Non-secret defaults visible to the build. All secrets must be set via
+# `wrangler pages secret put` or the Cloudflare dashboard (never committed):
+#   BUYO_API_TOKEN
+#   BUYO_FLOW_ID
+#   META_CAPI_ACCESS_TOKEN
+#   META_TEST_EVENT_CODE (optional)
+[vars]
+META_PIXEL_ID = "2935651803447339"
+BUYO_API_BASE = "https://api.buyo.network"
+BUYO_MOCK_MODE = "false"
+PRODUCT_VALUE_UZS = "125000"
+PRODUCT_CURRENCY = "UZS"
+PRODUCT_CONTENT_NAME = "Ultratovushli zararkunanda qaytargich"
+PRODUCT_CONTENT_ID = "ultrasonic-repeller-v1"
+
+[env.preview.vars]
+META_PIXEL_ID = "2935651803447339"
+BUYO_API_BASE = "https://api.buyo.network"
+BUYO_MOCK_MODE = "true"
+PRODUCT_VALUE_UZS = "125000"
+PRODUCT_CURRENCY = "UZS"
+PRODUCT_CONTENT_NAME = "Ultratovushli zararkunanda qaytargich"
+PRODUCT_CONTENT_ID = "ultrasonic-repeller-v1"
