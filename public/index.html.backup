@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#FFFFFF" />
+  <title>Pest Repeller — Ultratovushli zararkunanda qaytargich | Savdomix</title>
+  <meta name="description" content="Rozetkaga ulanadigan Pest Repeller ultratovushli qurilma. Sprey va zahar kerak emas. O'zbekiston bo'ylab yetkazib berish, oldindan to'lov yo'q. 125 000 so'm." />
+
+  <link rel="canonical" href="https://repeller.savdomix.uz/" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="product" />
+  <meta property="og:locale" content="uz_UZ" />
+  <meta property="og:title" content="Pest Repeller — Ultratovushli zararkunanda qaytargich" />
+  <meta property="og:description" content="Rozetkaga ulang. Sprey va zahar kerak emas. To'lov mahsulotni olganda — 125 000 so'm." />
+  <meta property="og:url" content="https://repeller.savdomix.uz/" />
+  <meta property="og:image" content="https://repeller.savdomix.uz/assets/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Preload critical assets -->
+  <link rel="preload" as="style" href="/assets/styles.css" />
+  <link rel="preload" as="image" href="/assets/product-master.png" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+
+  <!-- Structured data: Product + Offer -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "Pest Repeller Ultratovushli zararkunanda qaytargich",
+    "brand": { "@type": "Brand", "name": "Savdomix" },
+    "description": "Rozetkaga ulanadigan ultratovushli qurilma uy va idora uchun. Sprey va kimyoviy vositalar talab qilmaydi.",
+    "image": "https://repeller.savdomix.uz/assets/og.jpg",
+    "offers": {
+      "@type": "Offer",
+      "url": "https://repeller.savdomix.uz/",
+      "priceCurrency": "UZS",
+      "price": "125000",
+      "availability": "https://schema.org/InStock",
+      "areaServed": "UZ",
+      "acceptedPaymentMethod": "http://purl.org/goodrelations/v1#Cash"
+    }
+  }
+  </script>
+
+  <!-- Meta Pixel base -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2935651803447339&ev=PageView&noscript=1"
+    alt="" /></noscript>
+</head>
+<body class="pagePadBottom">
+  <a class="skip" href="#main">Asosiy mazmunga o'tish</a>
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar" role="banner">
+    <div class="container topbar__row">
+      <a class="brand" href="/" aria-label="Savdomix bosh sahifa">
+        <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.75"/>
+          <path d="M6 13l4 4 8-9" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand__name">Savdomix</span>
+      </a>
+      <ul class="trustPills" aria-label="Ishonch belgilari">
+        <li class="pill pill--green"><span aria-hidden="true">✓</span> Oldindan to'lov yo'q</li>
+        <li class="pill pill--green"><span aria-hidden="true">✓</span> Yetkazib berishda to'lov</li>
+        <li class="pill pill--green pill--last"><span aria-hidden="true">✓</span> O'zbekiston bo'ylab</li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== 1) HERO ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__grid">
+
+        <!-- Product visual — FIRST on mobile -->
+        <figure class="hero__visual" data-testid="hero-product-visual">
+          <div class="productCard">
+            <div class="productCard__waves" aria-hidden="true">
+              <span class="wave wave-1"></span>
+              <span class="wave wave-2"></span>
+              <span class="wave wave-3"></span>
+            </div>
+            <img
+              class="productCard__img"
+              src="/assets/product-master.png"
+              alt="Pest Repeller ultratovushli zararkunanda qaytargich qurilmasi — oq korpus, qora yon panellar, ko'k LED indikator"
+              width="400" height="400"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+          <div class="productBadges">
+            <span class="badge badge--blue">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10l-3.6 1.9.7-4L2.2 5.2l4-.6L8 1z" fill="currentColor"/></svg>
+              Ultratovush texnologiyasi
+            </span>
+            <span class="badge badge--gray">220V rozetka</span>
+          </div>
+        </figure>
+
+        <!-- Copy -->
+        <div class="hero__copy">
+          <p class="hero__eyebrow">Uy uchun zamonaviy yechim</p>
+          <h1 id="hero-title" class="h1">
+            Uyingizni bezovtachilardan<br/>
+            <span class="h1--accent">himoya qiling</span>
+          </h1>
+          <p class="hero__sub">
+            <strong>Pest Repeller</strong> — rozetkaga ulang va qurilma ishlaydi.
+            Sprey, plastina yoki zahar kerak emas.
+          </p>
+
+          <div class="priceCard" data-testid="hero-price-card">
+            <div class="priceCard__main">
+              <span class="priceCard__label">Narx</span>
+              <span class="price" data-testid="hero-price-text">125 000 <small>so'm</small></span>
+            </div>
+            <ul class="priceCard__notes" aria-label="To'lov shartlari">
+              <li>✓ To'lov mahsulotni olganda</li>
+              <li>✓ Oldindan to'lov yo'q</li>
+            </ul>
+          </div>
+
+          <div class="hero__ctas">
+            <button class="btn btn-primary btn-lg"
+                    data-scrollto="#form"
+                    data-track="hero_cta_click"
+                    data-testid="hero-buyurtma-berish-button">
+              Buyurtma berish
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="btn btn-secondary btn-lg"
+                    data-scrollto="#how"
+                    data-testid="hero-qanday-ishlaydi-button">
+              Qanday ishlaydi?
+            </button>
+          </div>
+
+          <ul class="microCallouts" aria-label="Asosiy xususiyatlar">
+            <li>
+              <svg class="i-sm" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1v14M1 8h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Uzluksiz ishlaydi
+            </li>
+            <li>
+              <svg class="i-sm" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Kimyoviy emas
+            </li>
+            <li>
+              <svg class="i-sm" viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="1" width="6" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 11v3M5 14h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Faqat rozetka
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true"/>
+
+    <!-- ===== 2) HOW IT WORKS ===== -->
+    <section id="how" class="section" aria-labelledby="how-title">
+      <div class="container">
+        <header class="sectionHead reveal">
+          <p class="eyebrow">Qanday ishlaydi</p>
+          <h2 id="how-title" class="h2">Uch oddiy qadam</h2>
+          <p class="lead">Murakkab o'rnatish yo'q. Quyidagi tartibga rioya qiling.</p>
+        </header>
+        <ol class="steps">
+          <li class="step reveal">
+            <div class="step__num">1</div>
+            <div>
+              <h3 class="h3">Rozetkaga ulang</h3>
+              <p>Qurilmani odatdagi 220&nbsp;V uy rozetkasiga ulang. Ko'k LED yonadi — qurilma ishlayapti.</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__num">2</div>
+            <div>
+              <h3 class="h3">Ultratovush chiqaradi</h3>
+              <p>Inson qulog'i sezmaydigan to'lqinlar bezovta qiluvchilarga ta'sir qilishi mumkin. Devor va qalin mebel signalni susaytiradi.</p>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__num">3</div>
+            <div>
+              <h3 class="h3">Bezovtachilar uzoqlashadi</h3>
+              <p>Vaqt o'tishi bilan ular yashash hududidan chiqishga moyil bo'ladi. Natija xonaga va to'g'ri joylashuvga bog'liq.</p>
+            </div>
+          </li>
+        </ol>
+        <p class="muted small reveal note-box">
+          <svg class="i-sm" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Eslatma: bu qurilma profilaktika vositasi. U professional dezinseksiyaning to'liq o'rnini bosa olmaydi.
+        </p>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true"/>
+
+    <!-- ===== 3) WHERE TO USE (with real room photos) ===== -->
+    <section id="where" class="section" aria-labelledby="where-title">
+      <div class="container">
+        <header class="sectionHead reveal">
+          <p class="eyebrow">Qayerda ishlatish mumkin</p>
+          <h2 id="where-title" class="h2">Har bir xona uchun</h2>
+          <p class="lead">Bitta qurilma — bitta xona. Har bir alohida xonaga alohida qurilma tavsiya etiladi.</p>
+        </header>
+        <div class="roomGrid">
+          <div class="roomCard reveal">
+            <div class="roomCard__img-wrap">
+              <img src="/assets/scene-kitchen.jpg" alt="Oshxonada Pest Repeller qurilmasi devor rozetkasiga ulangan" loading="lazy" decoding="async" width="544" height="408"/>
+              <span class="roomCard__label">Oshxona</span>
+            </div>
+            <p>Oziq-ovqat saqlanadigan joy — eng muhim himoya nuqtasi.</p>
+          </div>
+          <div class="roomCard reveal">
+            <div class="roomCard__img-wrap">
+              <img src="/assets/scene-bedroom.jpg" alt="Yotoqxonada Pest Repeller qurilmasi devor rozetkasiga ulangan" loading="lazy" decoding="async" width="544" height="408"/>
+              <span class="roomCard__label">Yotoqxona</span>
+            </div>
+            <p>Tinch uyqu uchun qurilma doim yoqilgan holatda ishlaydi.</p>
+          </div>
+          <div class="roomCard roomCard--text reveal">
+            <div class="roomCard__icon-list">
+              <div class="roomCard__icon-item">
+                <svg class="i i-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v11H4zM4 8l2-3h12l2 3" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg>
+                <div>
+                  <strong>Omborxona</strong>
+                  <p>Quruq mahsulot saqlanadigan joylar.</p>
+                </div>
+              </div>
+              <div class="roomCard__icon-item">
+                <svg class="i i-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V9l7-4 7 4v12M9 12h6M9 16h6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg>
+                <div>
+                  <strong>Ofis</strong>
+                  <p>Ish stoli, ko'rinmas burchaklar.</p>
+                </div>
+              </div>
+              <div class="roomCard__icon-item">
+                <svg class="i i-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12l9-9 9 9M5 10v10h14V10M10 20v-6h4v6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/></svg>
+                <div>
+                  <strong>Dala hovli</strong>
+                  <p>Mavsumiy uy yoki bog' uchastka.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true"/>
+
+    <!-- ===== 4) BENEFITS ===== -->
+    <section id="benefits" class="section" aria-labelledby="benefits-title">
+      <div class="container">
+        <header class="sectionHead reveal">
+          <p class="eyebrow">Afzalliklari</p>
+          <h2 id="benefits-title" class="h2">Nima uchun Pest Repeller?</h2>
+        </header>
+        <ul class="benefits">
+          <li class="benefit reveal">
+            <div class="benefit__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.75"/></svg>
+            </div>
+            <div>
+              <strong>Sprey va plastina shart emas</strong>
+              <p>Doimiy ravishda kimyoviy vositalar sotib olishingiz shart emas.</p>
+            </div>
+          </li>
+          <li class="benefit reveal">
+            <div class="benefit__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.75"/></svg>
+            </div>
+            <div>
+              <strong>Hidi yo'q</strong>
+              <p>Xonada o'tkir kimyoviy hid qoldirmaydi.</p>
+            </div>
+          </li>
+          <li class="benefit reveal">
+            <div class="benefit__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.75"/></svg>
+            </div>
+            <div>
+              <strong>Oson o'rnatish</strong>
+              <p>Faqat rozetkaga ulang — qo'shimcha sozlash kerak emas.</p>
+            </div>
+          </li>
+          <li class="benefit reveal">
+            <div class="benefit__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.75"/></svg>
+            </div>
+            <div>
+              <strong>Ixcham korpus</strong>
+              <p>Devor rozetkasida ko'zga tashlanmaydi, joy egallam aydi.</p>
+            </div>
+          </li>
+          <li class="benefit reveal">
+            <div class="benefit__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.75"/></svg>
+            </div>
+            <div>
+              <strong>Uzluksiz ishlaydi</strong>
+              <p>Ulangan paytda doim ishlaydi — almashtirish yoki to'ldirish shart emas.</p>
+            </div>
+          </li>
+          <li class="benefit reveal">
+            <div class="benefit__icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.75"/></svg>
+            </div>
+            <div>
+              <strong>Ko'k LED indikator</strong>
+              <p>Qurilma ishlayotganini ko'k yorug'lik orqali ko'rsatadi.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true"/>
+
+    <!-- ===== 5) PLACEMENT GUIDE (with photo) ===== -->
+    <section id="placement" class="section" aria-labelledby="placement-title">
+      <div class="container">
+        <header class="sectionHead reveal">
+          <p class="eyebrow">To'g'ri joylashtirish</p>
+          <h2 id="placement-title" class="h2">Samaradorlik joylashuvga bog'liq</h2>
+          <p class="lead">Quyidagi qoidalarga rioya qiling — bu eng ko'p qilinadigan xato.</p>
+        </header>
+        <div class="placementLayout">
+          <figure class="placementPhoto reveal">
+            <img
+              src="/assets/placement-guide.jpg"
+              alt="To'g'ri va noto'g'ri joylashtirishni ko'rsatuvchi rasm: to'g'ri — ochiq rozetka, noto'g'ri — mebel va parda ortida"
+              loading="lazy"
+              decoding="async"
+              width="544"
+              height="408"
+            />
+          </figure>
+          <div class="doDontGrid reveal">
+            <div class="doCard" aria-label="To'g'ri">
+              <h3 class="h3 doCard__title">
+                <svg viewBox="0 0 20 20" aria-hidden="true" class="i-sm"><circle cx="10" cy="10" r="9" fill="#DCFCE7"/><path d="M6 10l3 3 5-5" fill="none" stroke="#16A34A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                To'g'ri
+              </h3>
+              <ul>
+                <li>Ochiq, to'sib qo'yilmagan rozetkaga ulang.</li>
+                <li>Yer sathidan taxminan 0,8–1,2&nbsp;m balandlikda.</li>
+                <li>Har bir alohida xona uchun alohida qurilma.</li>
+                <li>Doim yoqilgan holatda saqlang.</li>
+              </ul>
+            </div>
+            <div class="dontCard" aria-label="Noto'g'ri">
+              <h3 class="h3 dontCard__title">
+                <svg viewBox="0 0 20 20" aria-hidden="true" class="i-sm"><circle cx="10" cy="10" r="9" fill="#FEE2E2"/><path d="M7 7l6 6M13 7l-6 6" fill="none" stroke="#DC2626" stroke-width="1.75" stroke-linecap="round"/></svg>
+                Noto'g'ri
+              </h3>
+              <ul>
+                <li>Mebel yoki parda ortiga yashirib qo'yish.</li>
+                <li>Nam, hammomli yoki yog'ingarchilik tegadigan joyga ulash.</li>
+                <li>Bitta qurilmadan butun uy uchun foydalanish.</li>
+                <li>Bir necha kun ichida natija kutish.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true"/>
+
+    <!-- ===== 6) SPECIFICATIONS ===== -->
+    <section id="specs" class="section" aria-labelledby="specs-title">
+      <div class="container">
+        <header class="sectionHead reveal">
+          <p class="eyebrow">Texnik ma'lumotlar</p>
+          <h2 id="specs-title" class="h2">Asosiy parametrlar</h2>
+          <p class="muted small">Aniq texnik ma'lumotlar yetkazib beruvchi yorlig'ida ko'rsatiladi.</p>
+        </header>
+        <dl class="specs reveal">
+          <div class="specRow">
+            <dt>Quvvat manbai</dt>
+            <dd>220&nbsp;V uy rozetkasi</dd>
+          </div>
+          <div class="specRow">
+            <dt>Tovush turi</dt>
+            <dd>Ultratovush (inson qulog'i sezmaydigan)</dd>
+          </div>
+          <div class="specRow">
+            <dt>Indikator</dt>
+            <dd>Ko'k LED (ishlayotganini ko'rsatadi)</dd>
+          </div>
+          <div class="specRow">
+            <dt>Korpus</dt>
+            <dd>Plastik, ixcham, devor rozetkasi uchun</dd>
+          </div>
+          <div class="specRow">
+            <dt>Tavsiya etilgan foydalanish</dt>
+            <dd>Bitta xona uchun bitta qurilma</dd>
+          </div>
+          <div class="specRow">
+            <dt>Foydalanish rejimi</dt>
+            <dd>Doimiy ulanish</dd>
+          </div>
+          <div class="specRow">
+            <dt>Komplekt</dt>
+            <dd>Qurilma + qo'llanma</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true"/>
+
+    <!-- ===== 7) ORDER STEPS ===== -->
+    <section id="order" class="section" aria-labelledby="order-title">
+      <div class="container">
+        <header class="sectionHead reveal">
+          <p class="eyebrow">Buyurtma va yetkazib berish</p>
+          <h2 id="order-title" class="h2">Qanday buyurtma beraman?</h2>
+        </header>
+        <ol class="timeline">
+          <li class="timeline__step reveal">
+            <div class="timeline__bullet">1</div>
+            <div>
+              <h3 class="h3">Ariza qoldiring</h3>
+              <p>Ism va telefon raqamingizni quyidagi formaga kiriting.</p>
+            </div>
+          </li>
+          <li class="timeline__step reveal">
+            <div class="timeline__bullet">2</div>
+            <div>
+              <h3 class="h3">Operator qo'ng'irog'i</h3>
+              <p>Manzilingizni tasdiqlash uchun siz bilan bog'lanadi.</p>
+            </div>
+          </li>
+          <li class="timeline__step reveal">
+            <div class="timeline__bullet">3</div>
+            <div>
+              <h3 class="h3">Yetkazib berish</h3>
+              <p>Buyurtmangiz O'zbekiston bo'ylab manzilingizgacha yetkaziladi.</p>
+            </div>
+          </li>
+          <li class="timeline__step reveal">
+            <div class="timeline__bullet">4</div>
+            <div>
+              <h3 class="h3">To'lov mahsulotni olganda</h3>
+              <p>Naqd to'lov — oldindan hech narsa to'lash shart emas.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true"/>
+
+    <!-- ===== 8) FAQ ===== -->
+    <section id="faq" class="section" aria-labelledby="faq-title">
+      <div class="container">
+        <header class="sectionHead reveal">
+          <p class="eyebrow">Tez-tez so'raladigan savollar</p>
+          <h2 id="faq-title" class="h2">Ko'p so'raladigan savollar</h2>
+        </header>
+        <div class="faq reveal" data-testid="faq-accordion">
+          <details>
+            <summary>Qurilma qanday ishlaydi?<span class="chev" aria-hidden="true"></span></summary>
+            <div><p>Qurilma rozetkaga ulanganda inson qulog'i sezmaydigan ultratovushli to'lqinlarni chiqaradi. Ko'k LED yonishi qurilma ishlayotganini bildiradi. Bu to'lqinlar atrofdagi hududda bezovta qiluvchilarni qaytarishga yordam beradi.</p></div>
+          </details>
+          <details>
+            <summary>Natija qachon sezilishi mumkin?<span class="chev" aria-hidden="true"></span></summary>
+            <div><p>Vaqt joyga va xonaga bog'liq. Ba'zilar bir necha kun ichida o'zgarishni sezadi, boshqalarida bir necha hafta kerak bo'lishi mumkin.</p></div>
+          </details>
+          <details>
+            <summary>Bitta qurilma nechta xonaga yetadi?<span class="chev" aria-hidden="true"></span></summary>
+            <div><p>Devor va qalin mebel ultratovush signalini susaytiradi, shuning uchun har bir alohida xona uchun alohida qurilma tavsiya etiladi.</p></div>
+          </details>
+          <details>
+            <summary>Qurilmani qayerga o'rnatish kerak?<span class="chev" aria-hidden="true"></span></summary>
+            <div><p>Ochiq, hech narsa bilan to'sib qo'yilmagan rozetkaga ulang. Mebel ortiga yashirmang. Yer sathidan 0,8–1,2 metr balandlikdagi rozetka tavsiya etiladi.</p></div>
+          </details>
+          <details>
+            <summary>U doim yoqilgan turishi kerakmi?<span class="chev" aria-hidden="true"></span></summary>
+            <div><p>Ha, doimiy ishlash tavsiya etiladi. Qurilma kam quvvat sarflaydi.</p></div>
+          </details>
+          <details>
+            <summary>Uy hayvonlari bo'lsa ishlatish mumkinmi?<span class="chev" aria-hidden="true"></span></summary>
+            <div><p>Iltimos, oldin yorliqdagi qo'llanmani o'qib chiqing. Ayrim turdagi uy hayvonlari ultratovushga sezgir bo'lishi mumkin.</p></div>
+          </details>
+          <details>
+            <summary>Yetkazib berish qancha vaqt oladi?<span class="chev" aria-hidden="true"></span></summary>
+            <div><p>O'zbekiston bo'ylab odatda bir necha ish kuni ichida yetkaziladi. Aniq muddat manzilingizga bog'liq.</p></div>
+          </details>
+          <details>
+            <summary>To'lov qanday amalga oshiriladi?<span class="chev" aria-hidden="true"></span></summary>
+            <div><p>To'lov mahsulotni qabul qilib olgan paytda, naqd shaklda amalga oshiriladi. Oldindan to'lov talab qilinmaydi.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true"/>
+
+    <!-- ===== 9) ORDER FORM ===== -->
+    <section id="form" class="section section--form" aria-labelledby="form-title">
+      <div class="container">
+        <div class="formCard reveal" data-testid="order-form-card">
+          <div class="formCard__product-strip">
+            <img src="/assets/product-master.png" alt="Pest Repeller" width="64" height="64" loading="lazy"/>
+            <div>
+              <strong>Pest Repeller</strong>
+              <span class="price-inline">125 000 so'm</span>
+            </div>
+            <span class="badge badge--green">Mavjud</span>
+          </div>
+
+          <header class="formCard__head">
+            <p class="eyebrow">Buyurtma</p>
+            <h2 id="form-title" class="h2">Aloqa uchun ma'lumotlaringiz</h2>
+            <p class="muted small">Operator buyurtmani tasdiqlash uchun qo'ng'iroq qiladi. Oldindan to'lov yo'q.</p>
+          </header>
+
+          <form id="orderForm" data-testid="order-form" novalidate>
+            <div class="field">
+              <label class="label" for="nameInput">Ismingiz</label>
+              <input class="input" id="nameInput" name="name" type="text"
+                     autocomplete="given-name" required minlength="2" maxlength="40"
+                     placeholder="Masalan: Maftuna"
+                     data-testid="order-form-name-input" />
+              <p class="helper" id="nameHelp">Lotin yoki Kirill harflari, 2–40 ta belgi.</p>
+            </div>
+
+            <div class="field">
+              <label class="label" for="phoneInput">Telefon raqamingiz</label>
+              <div class="phoneRow">
+                <span class="phoneChip" aria-hidden="true">+998</span>
+                <input class="input phoneInput" id="phoneInput" name="phone"
+                       type="tel" inputmode="numeric" autocomplete="tel"
+                       maxlength="14" required
+                       placeholder="90 123 45 67"
+                       data-testid="order-form-phone-input" />
+              </div>
+              <p class="helper" id="phoneHelp">Masalan: +998 90 123 45 67</p>
+            </div>
+
+            <div class="formMessages" aria-live="polite">
+              <p class="error hidden" id="formError" data-testid="order-form-error-text"></p>
+            </div>
+
+            <button class="btn btn-primary btn-lg formSubmit"
+                    type="submit"
+                    data-testid="order-form-submit-button">
+              <span class="formSubmit__label">Buyurtmani yuborish</span>
+              <svg class="spinner hidden" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="40 60"/>
+              </svg>
+            </button>
+
+            <p class="micro">Yuborish orqali siz operator qo'ng'irog'iga rozilik bildirasiz va shaxsiy ma'lumotlaringiz buyurtma uchun ishlatilishini tasdiqlaysiz.</p>
+          </form>
+
+          <!-- Success screen -->
+          <div class="successPane hidden" id="successPane" data-testid="order-form-success-pane" role="status" aria-live="polite">
+            <div class="successPane__icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="#DCFCE7"/><path d="M20 33l9 9 16-18" fill="none" stroke="#16A34A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="h2">Arizangiz qabul qilindi!</h3>
+            <p class="muted" data-testid="order-form-success-text">
+              Operator yaqin orada siz bilan bog'lanadi. Iltimos, telefoningiz yoningizda bo'lsin.
+            </p>
+            <div class="successPane__details">
+              <span>✓ Oldindan to'lov yo'q</span>
+              <span>✓ Yetkazib berishda to'lov</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <span class="brand__name">Savdomix</span>
+        <p class="micro">O'zbekistondagi xaridorlar uchun ishonchli uy mahsulotlari.</p>
+      </div>
+      <div>
+        <h4>Yetkazib berish</h4>
+        <p class="micro">O'zbekiston bo'ylab kuryer xizmati.</p>
+      </div>
+      <div>
+        <h4>To'lov</h4>
+        <p class="micro">Mahsulotni qabul qilib olgan paytda — naqd to'lov.</p>
+      </div>
+      <div>
+        <h4>Aloqa</h4>
+        <p class="micro">Operator qo'ng'irog'i orqali — formani to'ldiring.</p>
+      </div>
+    </div>
+    <div class="container">
+      <p class="micro disclaimer">
+        Eslatma: ultratovushli qurilma profilaktika vositasi. Samaradorlik xonaga,
+        joylashuvga va ishlatilish tartibiga bog'liq. Bu mahsulot tibbiy yoki
+        professional dezinseksiya xizmatlarining o'rnini bosa olmaydi.
+      </p>
+      <p class="micro disclaimer">
+        © Savdomix. Barcha huquqlar himoyalangan.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Sticky mobile CTA -->
+  <div class="stickyBar" role="region" aria-label="Buyurtma berish paneli">
+    <div class="stickyBar__inner">
+      <img class="stickyBar__img" src="/assets/product-master.png" alt="" aria-hidden="true" width="40" height="40" loading="lazy"/>
+      <div class="stickyBar__info">
+        <span class="stickyBar__name">Pest Repeller</span>
+        <span class="stickyBar__price">125 000 so'm</span>
+      </div>
+      <button class="btn btn-primary stickyBar__btn"
+              data-scrollto="#form"
+              data-track="hero_cta_click"
+              data-testid="sticky-buyurtma-berish-button">
+        Buyurtma
+        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>
