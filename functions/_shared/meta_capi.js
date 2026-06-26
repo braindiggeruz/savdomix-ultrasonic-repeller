@@ -5,6 +5,21 @@
 import { capiHashName, capiHashPhone, uaHash } from "./hash.js";
 import { isValidFbc, isValidFbp } from "./attribution.js";
 
+// Allowed bundle values (so'm) — server-side guard. Never trust client value blindly.
+const ALLOWED_ORDER_VALUES = new Set([125000, 225000, 315000]);
+
+// Resolve a trusted (value, quantity) pair from client-provided hints.
+// Falls back to the single-unit default if the hint is missing/invalid.
+export function resolveOrderValue(orderValue, quantity, env) {
+  const defaultValue = Number.parseInt(env.PRODUCT_VALUE_UZS || "125000", 10) || 125000;
+  const v = Number.parseInt(orderValue, 10);
+  const q = Number.parseInt(quantity, 10);
+  if (ALLOWED_ORDER_VALUES.has(v)) {
+    return { value: v, quantity: q >= 1 && q <= 3 ? q : 1 };
+  }
+  return { value: defaultValue, quantity: 1 };
+}
+
 export async function buildCapiLeadPayload(params, env) {
   const {
     eventId,
@@ -15,6 +30,8 @@ export async function buildCapiLeadPayload(params, env) {
     fbc,
     phoneCanonical,
     firstName,
+    orderValue,
+    quantity,
   } = params;
 
   const userData = {
@@ -26,9 +43,11 @@ export async function buildCapiLeadPayload(params, env) {
   if (isValidFbp(fbp)) userData.fbp = fbp;
   if (isValidFbc(fbc)) userData.fbc = fbc;
 
-  const valueRaw = env.PRODUCT_VALUE_UZS || "125000";
   const currency = env.PRODUCT_CURRENCY || "UZS";
-  const value = Number.parseInt(valueRaw, 10) || 125000;
+  const resolved = resolveOrderValue(orderValue, quantity, env);
+  const value = resolved.value;
+  const numItems = resolved.quantity;
+  const contentId = env.PRODUCT_CONTENT_ID || "ultrasonic-repeller-v1";
 
   const body = {
     data: [
@@ -44,8 +63,10 @@ export async function buildCapiLeadPayload(params, env) {
           currency,
           content_name: env.PRODUCT_CONTENT_NAME || "Ultratovushli zararkunanda qaytargich",
           content_category: "home_appliance",
-          content_ids: [env.PRODUCT_CONTENT_ID || "ultrasonic-repeller-v1"],
+          content_ids: [contentId],
           content_type: "product",
+          num_items: numItems,
+          contents: [{ id: contentId, quantity: numItems }],
         },
       },
     ],

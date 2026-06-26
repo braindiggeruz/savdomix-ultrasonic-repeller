@@ -1,447 +1,242 @@
-// Savdomix landing — vanilla JS (Meta Pixel + form + attribution + telemetry).
-// All API calls hit /api/* (Cloudflare Pages Functions in production,
-// a FastAPI mirror in the Emergent preview environment).
+// Savdomix landing — vanilla JS (Meta Pixel + multi-step form + attribution + telemetry).
+// All API calls hit /api/* (Cloudflare Pages Functions).
+//
+// Meta event contract (production semantics):
+//   PageView          : once on load
+//   ViewContent       : once on load
+//   Hero CTA          : custom 'HeroCTA_Click' only — NO InitiateCheckout
+//   invalid submit    : NO InitiateCheckout
+//   valid name+phone  : exactly one InitiateCheckout, immediately before /api/lead
+//   real BUYO accept  : Browser Lead + (server fires CAPI Lead) — SAME event_id
+//   BUYO reject/error : NO Lead
+//   no Purchase / no AddToCart
 
 (function () {
   "use strict";
-
-  // --- helpers ----------------------------------------------------
-  const $ = (sel, el) => (el || document).querySelector(sel);
-  const $$ = (sel, el) => Array.from((el || document).querySelectorAll(sel));
-
-  function nowMs() { return Date.now(); }
+  const $ = (s, e) => (e || document).querySelector(s);
+  const $$ = (s, e) => Array.from((e || document).querySelectorAll(s));
+  const nowMs = () => Date.now();
 
   function uuidv4() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
-    const b = new Uint8Array(16);
-    crypto.getRandomValues(b);
-    b[6] = (b[6] & 0x0f) | 0x40;
-    b[8] = (b[8] & 0x3f) | 0x80;
+    const b = new Uint8Array(16); crypto.getRandomValues(b);
+    b[6] = (b[6] & 0x0f) | 0x40; b[8] = (b[8] & 0x3f) | 0x80;
     const h = Array.from(b, (x) => x.toString(16).padStart(2, "0")).join("");
     return `${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20,32)}`;
   }
+  function setCookie(n, v, d) { const e = new Date(Date.now() + d * 864e5).toUTCString(); document.cookie = `${n}=${encodeURIComponent(v)}; expires=${e}; path=/; SameSite=Lax`; }
+  function getCookie(n) { const m = document.cookie.match(new RegExp("(?:^|; )" + n.replace(/[.$?*|{}()\[\]\\\/+^]/g, "\\$&") + "=([^;]*)")); return m ? decodeURIComponent(m[1]) : null; }
 
-  function setCookie(name, value, days) {
-    const exp = new Date(Date.now() + days * 864e5).toUTCString();
-    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${exp}; path=/; SameSite=Lax`;
-  }
-  function getCookie(name) {
-    const m = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/[.$?*|{}()\[\]\\\/+^]/g, "\\$&") + "=([^;]*)"));
-    return m ? decodeURIComponent(m[1]) : null;
-  }
-
-  // --- attribution capture ---------------------------------------
-  const ATTR_KEYS = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content",
-                     "campaign_id","adset_id","ad_id","placement","fbclid"];
+  // --- attribution ---
+  const ATTR_KEYS = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","campaign_id","adset_id","ad_id","placement","fbclid"];
   const STORAGE_KEY = "sdmx_attr_v1";
-
   function captureAttribution() {
-    const url = new URL(window.location.href);
-    const params = url.searchParams;
-    let stored = null;
-    try { stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch { stored = null; }
+    const params = new URL(window.location.href).searchParams;
+    let stored = null; try { stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch { stored = null; }
     const next = stored && typeof stored === "object" ? { ...stored } : {};
     let updated = false;
-    ATTR_KEYS.forEach((k) => {
-      const v = params.get(k);
-      if (v && (!next[k] || k === "fbclid")) { next[k] = v.slice(0, 256); updated = true; }
-    });
-    next.landing_url = window.location.href;
-    next.referrer = document.referrer || null;
-    if (!stored || updated) {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch { /* ignore */ }
-    }
-
-    // _fbp: create if missing
+    ATTR_KEYS.forEach((k) => { const v = params.get(k); if (v && (!next[k] || k === "fbclid")) { next[k] = v.slice(0, 256); updated = true; } });
+    next.landing_url = window.location.href; next.referrer = document.referrer || null;
+    if (!stored || updated) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch {} }
     let fbp = getCookie("_fbp");
-    if (!fbp) {
-      const rand = Math.floor(Math.random() * 1e10);
-      fbp = `fb.1.${Date.now()}.${rand}`;
-      setCookie("_fbp", fbp, 90);
-    }
-    // _fbc: build from fbclid if missing
+    if (!fbp) { fbp = `fb.1.${Date.now()}.${Math.floor(Math.random()*1e10)}`; setCookie("_fbp", fbp, 90); }
     let fbc = getCookie("_fbc");
-    if (!fbc && (next.fbclid || params.get("fbclid"))) {
-      const f = next.fbclid || params.get("fbclid");
-      fbc = `fb.1.${Date.now()}.${f}`;
-      setCookie("_fbc", fbc, 90);
-    }
-    next._fbp = fbp || null;
-    next._fbc = fbc || null;
+    if (!fbc && (next.fbclid || params.get("fbclid"))) { fbc = `fb.1.${Date.now()}.${next.fbclid || params.get("fbclid")}`; setCookie("_fbc", fbc, 90); }
+    next._fbp = fbp || null; next._fbc = fbc || null;
     return next;
   }
+  function getAttrs() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; } }
 
-  // --- telemetry --------------------------------------------------
+  // --- telemetry ---
   function track(event, extra) {
-    const body = JSON.stringify({
-      event,
-      ts: nowMs(),
-      page: window.location.pathname,
-      attrs: getAttrs(),
-      ...(extra || {}),
-    });
-    try {
-      if (navigator.sendBeacon) {
-        const blob = new Blob([body], { type: "application/json" });
-        navigator.sendBeacon("/api/track", blob);
-        return;
-      }
-    } catch { /* fallthrough */ }
+    const body = JSON.stringify({ event, ts: nowMs(), page: window.location.pathname, attrs: getAttrs(), ...(extra || {}) });
+    try { if (navigator.sendBeacon) { navigator.sendBeacon("/api/track", new Blob([body], { type: "application/json" })); return; } } catch {}
     fetch("/api/track", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});
   }
-  function getAttrs() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; }
-  }
 
-  // --- Meta Pixel -------------------------------------------------
-  const PIXEL_FIRED = { PageView: false, ViewContent: false, InitiateCheckout: false, Lead: false };
+  // --- Meta Pixel ---
+  const FIRED = { PageView: false, ViewContent: false, InitiateCheckout: false, Lead: false };
   let CONFIG = { pixel_id: "2935651803447339", value: 125000, currency: "UZS", content_name: "Ultratovushli zararkunanda qaytargich", content_id: "ultrasonic-repeller-v1", mock_mode: false };
 
-  function pixelInit() {
-    if (!window.fbq) return;
-    if (!window.__fbq_inited__) {
-      fbq("init", CONFIG.pixel_id);
-      window.__fbq_inited__ = true;
-    }
-  }
-  function firePageView() {
-    if (PIXEL_FIRED.PageView || !window.fbq) return;
-    pixelInit();
-    fbq("track", "PageView");
-    PIXEL_FIRED.PageView = true;
-  }
+  function pixelInit() { if (!window.fbq) return; if (!window.__fbq_inited__) { fbq("init", CONFIG.pixel_id); window.__fbq_inited__ = true; } }
+  function firePageView() { if (FIRED.PageView || !window.fbq) return; pixelInit(); fbq("track", "PageView"); FIRED.PageView = true; }
   function fireViewContent() {
-    if (PIXEL_FIRED.ViewContent || !window.fbq) return;
-    pixelInit();
-    fbq("track", "ViewContent", {
-      content_name: CONFIG.content_name,
-      content_category: "home_appliance",
-      content_ids: [CONFIG.content_id],
-      content_type: "product",
-      value: CONFIG.value,
-      currency: CONFIG.currency,
-    });
-    PIXEL_FIRED.ViewContent = true;
+    if (FIRED.ViewContent || !window.fbq) return; pixelInit();
+    fbq("track", "ViewContent", { content_name: CONFIG.content_name, content_category: "home_appliance", content_ids: [CONFIG.content_id], content_type: "product", value: CONFIG.value, currency: CONFIG.currency });
+    FIRED.ViewContent = true;
   }
-  function fireHeroCtaCustom() {
-    if (!window.fbq) return;
-    fbq("trackCustom", "HeroCTA_Click");
+  function fireHeroCtaCustom() { if (!window.fbq) return; fbq("trackCustom", "HeroCTA_Click"); }
+  function fireInitiateCheckout(eventId, value, qty) {
+    if (FIRED.InitiateCheckout || !window.fbq) return; pixelInit();
+    fbq("track", "InitiateCheckout", { content_name: CONFIG.content_name, content_ids: [CONFIG.content_id], num_items: qty || 1, value: value || CONFIG.value, currency: CONFIG.currency }, { eventID: eventId });
+    FIRED.InitiateCheckout = true;
   }
-  function fireFormView() {
-    if (!window.fbq) return;
-    fbq("trackCustom", "FormView");
-  }
-  function fireFormStart() {
-    if (!window.fbq) return;
-    fbq("trackCustom", "FormStart");
-  }
-  function fireInitiateCheckout(eventId) {
-    if (PIXEL_FIRED.InitiateCheckout || !window.fbq) return;
-    pixelInit();
-    fbq("track", "InitiateCheckout", {
-      content_name: CONFIG.content_name,
-      content_ids: [CONFIG.content_id],
-      value: CONFIG.value,
-      currency: CONFIG.currency,
-    }, { eventID: eventId });
-    PIXEL_FIRED.InitiateCheckout = true;
-  }
-  function fireLead(eventId) {
-    if (PIXEL_FIRED.Lead || !window.fbq) return;
-    pixelInit();
-    fbq("track", "Lead", {
-      content_name: CONFIG.content_name,
-      content_ids: [CONFIG.content_id],
-      value: CONFIG.value,
-      currency: CONFIG.currency,
-    }, { eventID: eventId });
-    PIXEL_FIRED.Lead = true;
+  function fireLead(eventId, value, qty) {
+    if (FIRED.Lead || !window.fbq) return; pixelInit();
+    fbq("track", "Lead", { content_name: CONFIG.content_name, content_ids: [CONFIG.content_id], num_items: qty || 1, value: value || CONFIG.value, currency: CONFIG.currency }, { eventID: eventId });
+    FIRED.Lead = true;
   }
 
-  // --- Config fetch ----------------------------------------------
   async function loadConfig() {
-    try {
-      const r = await fetch("/api/config", { credentials: "same-origin" });
-      if (r.ok) {
-        const d = await r.json();
-        Object.assign(CONFIG, d || {});
-      }
-    } catch { /* keep defaults */ }
+    try { const r = await fetch("/api/config", { credentials: "same-origin" }); if (r.ok) { Object.assign(CONFIG, (await r.json()) || {}); } } catch {}
   }
 
-  // --- Smooth scroll for CTA buttons ------------------------------
+  // --- smooth scroll / CTA ---
   function bindSmoothScroll() {
     $$("[data-scrollto]").forEach((b) => {
       b.addEventListener("click", (ev) => {
-        const sel = b.getAttribute("data-scrollto");
-        const target = sel ? document.querySelector(sel) : null;
-        if (!target) return;
+        const t = document.querySelector(b.getAttribute("data-scrollto")); if (!t) return;
         ev.preventDefault();
-        const top = target.getBoundingClientRect().top + window.scrollY - 8;
-        window.scrollTo({ top, behavior: "smooth" });
-        if (b.dataset.track === "hero_cta_click") {
-          fireHeroCtaCustom();
-          track("hero_cta_click");
-        }
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 8, behavior: "smooth" });
+        if (b.dataset.track === "hero_cta_click") { fireHeroCtaCustom(); track("hero_cta_click"); }
+      });
+    });
+  }
+  function bindReveal() {
+    if (!("IntersectionObserver" in window)) { $$(".reveal").forEach((e) => e.classList.add("is-in")); return; }
+    const io = new IntersectionObserver((en) => { en.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    $$(".reveal").forEach((e) => io.observe(e));
+  }
+
+  // --- phone mask ---
+  function formatUZ(d) { const p = d.slice(0,9); let o=""; const a=p.slice(0,2),b=p.slice(2,5),c=p.slice(5,7),e=p.slice(7,9); if(a)o+=a; if(b)o+=(o?" ":"")+b; if(c)o+=" "+c; if(e)o+=" "+e; return o; }
+  function normDigits(raw) { let d = String(raw||"").replace(/\D+/g,""); if(d.startsWith("00998"))d=d.slice(2); if(d.length===10&&d.startsWith("8"))d=d.slice(1); if(d.startsWith("998"))d=d.slice(3); return d.slice(0,9); }
+  function bindPhoneMask() {
+    const p = $("#phoneInput"); if (!p) return;
+    p.addEventListener("input", (e) => { e.target.value = formatUZ(normDigits(e.target.value)); });
+    p.addEventListener("paste", () => setTimeout(() => { p.value = formatUZ(normDigits(p.value)); }, 0));
+  }
+
+  // --- validators ---
+  const NAME_RE = /^[A-Za-z\u0400-\u04FF\u02BB\u02BC\u2018\u2019' \-\u02B9]{2,40}$/;
+  function validateName(v) { const s = String(v||"").trim(); if (s.length < 2) return { ok:false, msg:"To'g'ri ism kiriting (2–40 harf)" }; if (s.length > 40) return { ok:false, msg:"Ism juda uzun." }; if (!NAME_RE.test(s)) return { ok:false, msg:"Ismda faqat harflar, bo'sh joy yoki tire bo'lishi mumkin." }; return { ok:true, value:s }; }
+  const OPS = new Set(["33","50","55","61","62","65","66","67","69","70","71","72","73","74","75","76","77","78","79","88","90","91","93","94","95","97","98","99"]);
+  function validatePhone(d) { if (!d || d.length !== 9) return { ok:false, msg:"Telefon raqamingizni to'liq kiriting." }; if (!OPS.has(d.slice(0,2))) return { ok:false, msg:"Telefon raqami formati noto'g'ri." }; return { ok:true, value:"998"+d }; }
+
+  function showError(m) { const el = $("#formError"); if (!el) return; el.textContent = m; el.classList.remove("hidden"); }
+  function clearError() { const el = $("#formError"); if (!el) return; el.textContent = ""; el.classList.add("hidden"); }
+  const fmt = (n) => new Intl.NumberFormat("ru-RU").format(n).replace(/,/g, " ");
+
+  // --- quantity state ---
+  let selectedQty = 1, selectedPrice = 125000;
+  function bindQty() {
+    $$("#qtys .qty").forEach((q) => {
+      q.addEventListener("click", () => {
+        $$("#qtys .qty").forEach((x) => x.classList.remove("sel"));
+        q.classList.add("sel");
+        selectedQty = parseInt(q.dataset.qty, 10);
+        selectedPrice = parseInt(q.dataset.price, 10);
+        const cp = $("#cardPrice"); if (cp) cp.textContent = fmt(selectedPrice) + " so'm";
       });
     });
   }
 
-  // --- Reveal on scroll ------------------------------------------
-  function bindReveal() {
-    if (!("IntersectionObserver" in window)) {
-      $$(".reveal").forEach((el) => el.classList.add("is-in"));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
-    }, { root: null, threshold: 0.12, rootMargin: "0px 0px -10% 0px" });
-    $$(".reveal").forEach((el) => io.observe(el));
-  }
-
-  // --- Phone mask (Uzbek, +998) -----------------------------------
-  function formatUZ(d) {
-    const p = d.slice(0, 9);
-    const a = p.slice(0, 2);
-    const b = p.slice(2, 5);
-    const c = p.slice(5, 7);
-    const e = p.slice(7, 9);
-    let out = "";
-    if (a) out += a;
-    if (b) out += (out ? " " : "") + b;
-    if (c) out += " " + c;
-    if (e) out += " " + e;
-    return out;
-  }
-  function normalizeInputToDigits(raw) {
-    let digits = String(raw || "").replace(/\D+/g, "");
-    if (digits.startsWith("00998")) digits = digits.slice(2);
-    if (digits.length === 10 && digits.startsWith("8")) digits = digits.slice(1);
-    if (digits.startsWith("998")) digits = digits.slice(3);
-    return digits.slice(0, 9);
-  }
-  function bindPhoneMask() {
-    const phone = $("#phoneInput");
-    if (!phone) return;
-    phone.addEventListener("input", (ev) => {
-      const digits = normalizeInputToDigits(ev.target.value);
-      ev.target.value = formatUZ(digits);
-    });
-    phone.addEventListener("paste", () => {
-      setTimeout(() => {
-        const digits = normalizeInputToDigits(phone.value);
-        phone.value = formatUZ(digits);
-      }, 0);
-    });
-  }
-
-  // --- Form validators -------------------------------------------
-  // Accept both Latin and Cyrillic Uzbek names
-  const MIXED_NAME_RE = /^[A-Za-z\u0400-\u04FF\u02BB\u02BC\u2018\u2019' \-\u02B9]{2,40}$/;
-  function validateName(v) {
-    const s = String(v || "").trim();
-    if (s.length < 2) return { ok: false, code: "too_short", msg: "Iltimos, ismingizni kiriting." };
-    if (s.length > 40) return { ok: false, code: "too_long", msg: "Ism juda uzun." };
-    if (!MIXED_NAME_RE.test(s)) return { ok: false, code: "invalid", msg: "Ismda faqat harflar, bo'sh joy yoki tire bo'lishi mumkin." };
-    return { ok: true, value: s };
-  }
-  function validatePhoneDigits(d) {
-    if (!d || d.length !== 9) return { ok: false, code: "phone", msg: "Telefon raqamingizni to‘liq kiriting." };
-    const op = d.slice(0, 2);
-    const allowed = new Set(["33","50","55","61","62","65","66","67","69",
-                              "70","71","72","73","74","75","76","77","78","79",
-                              "88","90","91","93","94","95","97","98","99"]);
-    if (!allowed.has(op)) return { ok: false, code: "phone_op", msg: "Bunday telefon raqami formati noto‘g‘ri." };
-    return { ok: true, value: "998" + d };
-  }
-
-  function showError(msg) {
-    const el = $("#formError");
-    if (!el) return;
-    el.textContent = msg;
-    el.classList.remove("hidden");
-  }
-  function clearError() {
-    const el = $("#formError");
-    if (!el) return;
-    el.textContent = "";
-    el.classList.add("hidden");
-  }
-
-  // --- Form submit -----------------------------------------------
-  let submitInFlight = false;
+  // --- multi-step ---
   let formStartFired = false;
-  function bindForm() {
-    const form = $("#orderForm");
-    if (!form) return;
-    const nameEl = $("#nameInput");
-    const phoneEl = $("#phoneInput");
-    const submitBtn = form.querySelector(".formSubmit");
-    const submitLabel = submitBtn.querySelector(".formSubmit__label");
-    const spinner = submitBtn.querySelector(".spinner");
-
-    const onFirstInteraction = () => {
-      if (formStartFired) return;
-      formStartFired = true;
-      fireFormStart();
-      track("form_start");
-    };
-    [nameEl, phoneEl].forEach((el) => {
-      el.addEventListener("focus", onFirstInteraction, { once: true });
-      el.addEventListener("input", onFirstInteraction, { once: true });
+  function bindSteps() {
+    const s1 = $("#step1"), form = $("#orderForm");
+    const to2 = $("#toStep2"), back1 = $("#backStep1");
+    if (!s1 || !form) return;
+    to2.addEventListener("click", () => {
+      $("#sumQty").textContent = selectedQty;
+      $("#sumTotal").textContent = fmt(selectedPrice) + " so'm";
+      s1.classList.add("hidden"); form.classList.remove("hidden");
+      $("#nameInput").focus();
+      if (!formStartFired) { formStartFired = true; if (window.fbq) fbq("trackCustom", "FormStart"); track("form_start"); }
     });
+    back1.addEventListener("click", () => { form.classList.add("hidden"); s1.classList.remove("hidden"); clearError(); });
+  }
+
+  // --- submit ---
+  let submitInFlight = false;
+  function bindForm() {
+    const form = $("#orderForm"); if (!form) return;
+    const nameEl = $("#nameInput"), phoneEl = $("#phoneInput");
+    const btn = form.querySelector(".formSubmit");
+    const label = btn.querySelector(".formSubmit__label");
+    const spinner = btn.querySelector(".spinner");
 
     form.addEventListener("submit", async (ev) => {
-      ev.preventDefault();
-      if (submitInFlight) return;
-
+      ev.preventDefault(); if (submitInFlight) return;
       clearError();
       const nameCheck = validateName(nameEl.value);
-      const digits = normalizeInputToDigits(phoneEl.value);
-      const phoneCheck = validatePhoneDigits(digits);
+      const phoneCheck = validatePhone(normDigits(phoneEl.value));
+      if (!nameCheck.ok) { nameEl.classList.add("is-invalid"); showError(nameCheck.msg); nameEl.focus(); return; }
+      nameEl.classList.remove("is-invalid");
+      if (!phoneCheck.ok) { phoneEl.parentElement.classList.add("is-invalid"); showError(phoneCheck.msg); phoneEl.focus(); return; }
+      phoneEl.parentElement.classList.remove("is-invalid");
 
-      if (!nameCheck.ok) {
-        nameEl.classList.add("is-invalid");
-        showError(nameCheck.msg);
-        nameEl.focus();
-        return;
-      } else { nameEl.classList.remove("is-invalid"); }
-
-      if (!phoneCheck.ok) {
-        phoneEl.classList.add("is-invalid");
-        showError(phoneCheck.msg);
-        phoneEl.focus();
-        return;
-      } else { phoneEl.classList.remove("is-invalid"); }
-
-      // Build payload
       const attrs = getAttrs();
       const eventId = uuidv4();
       const body = {
         name: nameCheck.value,
-        phone: "+" + phoneCheck.value,  // +998XXXXXXXXX
+        phone: "+" + phoneCheck.value,
+        quantity: selectedQty,
+        order_value: selectedPrice,
         attrs: {
-          utm_source: attrs.utm_source || null,
-          utm_medium: attrs.utm_medium || null,
-          utm_campaign: attrs.utm_campaign || null,
-          utm_term: attrs.utm_term || null,
-          utm_content: attrs.utm_content || null,
-          campaign_id: attrs.campaign_id || null,
-          adset_id: attrs.adset_id || null,
-          ad_id: attrs.ad_id || null,
-          placement: attrs.placement || null,
-          fbclid: attrs.fbclid || null,
-          _fbp: attrs._fbp || null,
-          _fbc: attrs._fbc || null,
+          utm_source: attrs.utm_source || null, utm_medium: attrs.utm_medium || null,
+          utm_campaign: attrs.utm_campaign || null, utm_term: attrs.utm_term || null, utm_content: attrs.utm_content || null,
+          campaign_id: attrs.campaign_id || null, adset_id: attrs.adset_id || null, ad_id: attrs.ad_id || null,
+          placement: attrs.placement || null, fbclid: attrs.fbclid || null,
+          _fbp: attrs._fbp || null, _fbc: attrs._fbc || null,
           landing_url: attrs.landing_url || window.location.href,
+          quantity: selectedQty, order_value: selectedPrice,
         },
         client_event_id: eventId,
       };
 
-      // InitiateCheckout (once, valid submit only)
-      fireInitiateCheckout(eventId);
+      // InitiateCheckout — once, valid submit only
+      fireInitiateCheckout(eventId, selectedPrice, selectedQty);
       track("valid_submit", { event_id: eventId });
 
-      // UI: loading
-      submitInFlight = true;
-      submitBtn.disabled = true;
-      submitBtn.setAttribute("aria-busy", "true");
-      submitLabel.textContent = "Yuborilmoqda…";
-      spinner.classList.remove("hidden");
+      submitInFlight = true; btn.disabled = true; btn.setAttribute("aria-busy", "true");
+      label.textContent = "Yuborilmoqda…"; spinner.classList.remove("hidden");
 
       try {
         track("api_started");
-        const resp = await fetch("/api/lead", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-          credentials: "same-origin",
-        });
+        const resp = await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), credentials: "same-origin" });
         const data = await resp.json().catch(() => ({}));
-
         if (resp.ok && data && data.accepted) {
-          // Use server's event_id (single source of truth for dedup)
-          const serverEid = data.event_id || eventId;
+          const eid = data.event_id || eventId;
           if (CONFIG.mock_mode || data.mode === "mock") {
-            track("mock_buyo_accepted", { event_id: serverEid });
-            track("mock_lead_would_fire", { event_id: serverEid });
+            track("mock_buyo_accepted", { event_id: eid }); track("mock_lead_would_fire", { event_id: eid });
           } else {
-            fireLead(serverEid);
-            track("buyo_accepted", { event_id: serverEid });
-            track("lead_success", { event_id: serverEid });
+            fireLead(eid, selectedPrice, selectedQty);
+            track("buyo_accepted", { event_id: eid }); track("lead_success", { event_id: eid });
           }
           showSuccess();
         } else {
           track("buyo_rejected", { http: resp.status, code: (data && data.code) || "unknown" });
-          showError("Buyurtmani yuborib bo‘lmadi. Iltimos, bir oz kutib qayta urinib ko‘ring.");
-          submitBtn.classList.add("shake");
-          setTimeout(() => submitBtn.classList.remove("shake"), 400);
-          submitInFlight = false;
-          submitBtn.disabled = false;
-          submitBtn.removeAttribute("aria-busy");
-          submitLabel.textContent = "Buyurtmani yuborish";
-          spinner.classList.add("hidden");
+          showError("Buyurtmani yuborib bo'lmadi. Iltimos, bir oz kutib qayta urinib ko'ring.");
+          btn.classList.add("shake"); setTimeout(() => btn.classList.remove("shake"), 400);
+          submitInFlight = false; btn.disabled = false; btn.removeAttribute("aria-busy"); label.textContent = "Buyurtmani tasdiqlash"; spinner.classList.add("hidden");
         }
-      } catch (e) {
+      } catch {
         track("api_error");
-        showError("Ulanish bilan muammo. Internet aloqasini tekshirib qayta urinib ko‘ring.");
-        submitInFlight = false;
-        submitBtn.disabled = false;
-        submitBtn.removeAttribute("aria-busy");
-        submitLabel.textContent = "Buyurtmani yuborish";
-        spinner.classList.add("hidden");
+        showError("Ulanish bilan muammo. Internet aloqasini tekshirib qayta urinib ko'ring.");
+        submitInFlight = false; btn.disabled = false; btn.removeAttribute("aria-busy"); label.textContent = "Buyurtmani tasdiqlash"; spinner.classList.add("hidden");
       }
     });
   }
-
   function showSuccess() {
-    const card = $(".formCard");
-    const form = $("#orderForm");
-    const pane = $("#successPane");
-    if (form) form.classList.add("hidden");
-    if (card && card.querySelector(".formCard__head")) card.querySelector(".formCard__head").classList.add("hidden");
-    if (pane) pane.classList.remove("hidden");
-    pane && pane.scrollIntoView({ behavior: "smooth", block: "center" });
+    $("#orderForm").classList.add("hidden");
+    const s1 = $("#step1"); if (s1) s1.classList.add("hidden");
+    const head = document.querySelector(".formCard__head"); if (head) head.classList.add("hidden");
+    const pane = $("#successPane"); if (pane) { pane.classList.remove("hidden"); pane.scrollIntoView({ behavior: "smooth", block: "center" }); }
   }
 
-  // --- FormView when form scrolls into view ----------------------
   let formViewFired = false;
-  function bindFormViewObserver() {
-    const form = $("#form");
-    if (!form || !("IntersectionObserver" in window)) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && !formViewFired) {
-          formViewFired = true;
-          fireFormView();
-          track("form_view");
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.35 });
-    io.observe(form);
+  function bindFormView() {
+    const f = $("#order"); if (!f || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver((en) => { en.forEach((e) => { if (e.isIntersecting && !formViewFired) { formViewFired = true; if (window.fbq) fbq("trackCustom", "FormView"); track("form_view"); io.unobserve(e.target); } }); }, { threshold: 0.3 });
+    io.observe(f);
   }
 
-  // --- Boot -------------------------------------------------------
   async function boot() {
     captureAttribution();
     await loadConfig();
-    pixelInit();
-    // Fire PageView and ViewContent ONCE, after config is ready.
-    firePageView();
-    fireViewContent();
-    track("landing_view");
-
-    bindSmoothScroll();
-    bindReveal();
-    bindPhoneMask();
-    bindForm();
-    bindFormViewObserver();
+    pixelInit(); firePageView(); fireViewContent(); track("landing_view");
+    bindSmoothScroll(); bindReveal(); bindPhoneMask(); bindQty(); bindSteps(); bindForm(); bindFormView();
   }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
 })();
