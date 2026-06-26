@@ -1,34 +1,333 @@
 <!DOCTYPE html>
 <html lang="uz-Latn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pest Repeller — ultratovushli zararkunanda qaytargich. Rozetkaga ulang. Sprey, plastina yoki zahar kerak emas.">
-  <meta name="theme-color" content="#1f232e">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pest Repeller — Ultratovushli zararkunanda qaytargich</title>
-  <link rel="stylesheet" href="/assets/styles.css">
+  <meta name="description" content="Pest Repeller — rozetkaga ulanadigan ultratovushli zararkunanda qaytargich. Sprey, plastina yoki zahar kerak emas. Yetkazib berilganda to'lash — 125 000 so'm." />
+  <meta name="theme-color" content="#1f232e" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href="https://savdomix-ultrasonic-repeller.pages.dev/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="product" />
+  <meta property="og:title" content="Pest Repeller — Ultratovushli zararkunanda qaytargich" />
+  <meta property="og:description" content="Rozetkaga ulang. Sprey, plastina yoki zahar kerak emas. Yetkazib berilganda to'lash." />
+  <meta property="og:image" content="/assets/og.jpg" />
+  <meta property="og:locale" content="uz_UZ" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Pest Repeller — Ultratovushli zararkunanda qaytargich",
+    "description": "Rozetkaga ulanadigan ultratovushli zararkunanda qaytargich.",
+    "image": "/assets/product-master.png",
+    "brand": { "@type": "Brand", "name": "Pest Repeller" },
+    "offers": {
+      "@type": "Offer",
+      "price": "125000",
+      "priceCurrency": "UZS",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="container">
-      <div class="navbar-brand">
-        <span class="logo-icon">◆</span>
-        <span class="logo-text">Pest Repeller</span>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="#top" aria-label="Pest Repeller">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">Pest&nbsp;Repeller</span>
+      </a>
+      <div class="nav__right">
+        <span class="nav__price">125&nbsp;000&nbsp;so'm</span>
+        <button class="btn btn--primary btn--sm" data-scrollto="#form" data-track="hero_cta_click">Buyurtma berish</button>
       </div>
     </div>
   </nav>
 
-  <main id="main">
+  <main id="top">
+    <!-- HERO -->
     <section class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__copy reveal">
+          <span class="eyebrow eyebrow--mint">Uy uchun zamonaviy himoya</span>
+          <h1 class="hero__title">Zararkunandalarni<br /><span class="grad-text">ultratovush</span> bilan uzoqlashtiring</h1>
+          <p class="hero__lead">Pest Repeller — rozetkaga ulanadigan kichik qurilma. Sprey, plastina yoki zahar ishlatmasdan, kvartirangizni toza tuting.</p>
+          <ul class="hero__points">
+            <li><span class="tick" aria-hidden="true"></span> Sprey, zahar va hidsiz</li>
+            <li><span class="tick" aria-hidden="true"></span> Rozetkaga ulang — tamom</li>
+            <li><span class="tick" aria-hidden="true"></span> Bolalar va uy hayvonlari yonida</li>
+          </ul>
+          <div class="hero__cta">
+            <button class="btn btn--primary btn--lg" data-scrollto="#form" data-track="hero_cta_click">Buyurtma berish</button>
+            <div class="hero__price">
+              <span class="hero__price-val">125 000 so'm</span>
+              <span class="hero__price-note">Yetkazib berilganda to'laysiz</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__visual reveal">
+          <div class="device-stage">
+            <span class="wave wave--1" aria-hidden="true"></span>
+            <span class="wave wave--2" aria-hidden="true"></span>
+            <span class="wave wave--3" aria-hidden="true"></span>
+            <img src="/assets/product-master.png" alt="Pest Repeller ultratovushli qurilma" class="device-img" width="420" height="420" loading="eager" />
+          </div>
+        </div>
+      </div>
+      <div class="trustbar container reveal">
+        <div class="trustbar__item"><span class="trustbar__k">Hidsiz</span><span class="trustbar__v">Kimyo yo'q</span></div>
+        <div class="trustbar__item"><span class="trustbar__k">Sokin</span><span class="trustbar__v">Inson eshitmaydi</span></div>
+        <div class="trustbar__item"><span class="trustbar__k">Oson</span><span class="trustbar__v">O'rnatish 1 daqiqa</span></div>
+        <div class="trustbar__item"><span class="trustbar__k">To'lov</span><span class="trustbar__v">Qabul qilganda</span></div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
       <div class="container">
-        <h1>Ultratovushli zararkunanda qaytargich</h1>
-        <p>Rozetkaga ulang. Sprey, plastina yoki zahar kerak emas.</p>
-        <img src="/assets/product-master.png" alt="Pest Repeller" class="product-image">
-        <button class="btn btn-primary">Buyurtma berish</button>
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--violet">Qanday ishlaydi</span>
+          <h2 class="section__title">Uch qadamda himoya</h2>
+          <p class="section__sub">Murakkab sozlash shart emas. Qurilmani ulang va u o'z ishini qiladi.</p>
+        </div>
+        <div class="steps reveal">
+          <div class="step">
+            <div class="step__num">01</div>
+            <h3 class="step__title">Rozetkaga ulang</h3>
+            <p class="step__text">Qurilmani xonadagi rozetkaga to'g'ridan-to'g'ri ulang. Simlar va batareyalar kerak emas.</p>
+          </div>
+          <div class="step">
+            <div class="step__num">02</div>
+            <h3 class="step__title">Ultratovush tarqaladi</h3>
+            <p class="step__text">Qurilma inson qulog'i sezmaydigan tovush chiqaradi va zararkunandalar uchun noqulay muhit yaratadi.</p>
+          </div>
+          <div class="step">
+            <div class="step__num">03</div>
+            <h3 class="step__title">Xona tinchlanadi</h3>
+            <p class="step__text">Qurilmani doimiy yoqilgan holatda qoldiring — uy muhitini toza saqlashga yordam beradi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="section section--alt" id="benefits">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--blue">Nega Pest Repeller</span>
+          <h2 class="section__title">Zamonaviy, toza va xavfsiz yechim</h2>
+        </div>
+        <div class="features reveal">
+          <div class="feature">
+            <span class="feature__ic feature__ic--mint" aria-hidden="true">~</span>
+            <h3 class="feature__title">Kimyosiz</h3>
+            <p class="feature__text">Sprey, gel yoki zaharli plastinalar ishlatilmaydi. Havo toza qoladi.</p>
+          </div>
+          <div class="feature">
+            <span class="feature__ic feature__ic--blue" aria-hidden="true">♪</span>
+            <h3 class="feature__title">Sokin ishlaydi</h3>
+            <p class="feature__text">Chiqadigan tovush inson qulog'iga sezilmaydi — kechasi ham xalaqit bermaydi.</p>
+          </div>
+          <div class="feature">
+            <span class="feature__ic feature__ic--amber" aria-hidden="true">⏻</span>
+            <h3 class="feature__title">Tejamkor</h3>
+            <p class="feature__text">Kam quvvat sarflaydi va doimiy ishlash uchun mo'ljallangan.</p>
+          </div>
+          <div class="feature">
+            <span class="feature__ic feature__ic--violet" aria-hidden="true">⌂</span>
+            <h3 class="feature__title">Uy uchun qulay</h3>
+            <p class="feature__text">Yotoqxona, oshxona, omborxona va dahliz — har bir xonaga mos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHERE TO USE -->
+    <section class="section" id="where">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--mint">Qayerda ishlatish mumkin</span>
+          <h2 class="section__title">Har bir xona uchun</h2>
+        </div>
+        <div class="scenes reveal">
+          <figure class="scene">
+            <img src="/assets/scene-kitchen.jpg" alt="Oshxonada o'rnatilgan qurilma" loading="lazy" />
+            <figcaption>Oshxona</figcaption>
+          </figure>
+          <figure class="scene">
+            <img src="/assets/scene-bedroom.jpg" alt="Yotoqxonada o'rnatilgan qurilma" loading="lazy" />
+            <figcaption>Yotoqxona</figcaption>
+          </figure>
+          <figure class="scene scene--wide">
+            <img src="/assets/hero-lifestyle.jpg" alt="Uy interyerida qurilma" loading="lazy" />
+            <figcaption>Dahliz va omborxona</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLACEMENT -->
+    <section class="section section--alt" id="placement">
+      <div class="container placement">
+        <div class="placement__media reveal">
+          <img src="/assets/placement-guide.jpg" alt="Qurilmani to'g'ri joylashtirish" loading="lazy" />
+        </div>
+        <div class="placement__copy reveal">
+          <span class="eyebrow eyebrow--blue">To'g'ri o'rnatish</span>
+          <h2 class="section__title">Eng yaxshi natija uchun</h2>
+          <ul class="checklist">
+            <li class="ok">Ochiq devordagi rozetkaga ulang</li>
+            <li class="ok">Pol darajasidan biroz balandroq joylashtiring</li>
+            <li class="ok">Har bir asosiy xonaga alohida qurilma qo'ying</li>
+            <li class="no">Mebel yoki parda orqasiga yashirmang</li>
+            <li class="no">Qalin to'siqlar tovushni susaytiradi</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER FORM -->
+    <section class="section" id="form">
+      <div class="container form-wrap">
+        <div class="form-intro reveal">
+          <span class="eyebrow eyebrow--mint">Buyurtma</span>
+          <h2 class="section__title">Buyurtmani rasmiylashtiring</h2>
+          <p class="section__sub">Ism va telefon raqamingizni qoldiring. Operator siz bilan bog'lanib, buyurtmani tasdiqlaydi. To'lov — qurilmani qabul qilganingizda.</p>
+          <ul class="order-facts">
+            <li><span class="order-facts__k">Narx</span><span class="order-facts__v">125 000 so'm</span></li>
+            <li><span class="order-facts__k">To'lov</span><span class="order-facts__v">Yetkazib berilganda</span></li>
+            <li><span class="order-facts__k">Oldindan to'lov</span><span class="order-facts__v">Kerak emas</span></li>
+          </ul>
+        </div>
+
+        <div class="formCard reveal">
+          <div class="formCard__head">
+            <div class="formCard__product">
+              <img src="/assets/product-master.png" alt="Pest Repeller" class="formCard__thumb" width="64" height="64" />
+              <div>
+                <div class="formCard__name">Pest Repeller</div>
+                <div class="formCard__price">125 000 so'm</div>
+              </div>
+            </div>
+          </div>
+
+          <form id="orderForm" novalidate>
+            <div class="field">
+              <label for="nameInput">Ismingiz</label>
+              <input id="nameInput" name="name" type="text" autocomplete="name" inputmode="text" placeholder="Ismingiz" required />
+              <small class="field__hint">Lotin yoki Kirill harflari, 2–40 ta belgi</small>
+            </div>
+            <div class="field">
+              <label for="phoneInput">Telefon raqamingiz</label>
+              <div class="phone">
+                <span class="phone__prefix">+998</span>
+                <input id="phoneInput" name="phone" type="tel" autocomplete="tel" inputmode="numeric" placeholder="90 123 45 67" required />
+              </div>
+              <small class="field__hint">Operator shu raqamga qo'ng'iroq qiladi</small>
+            </div>
+            <div id="formError" class="form-error hidden" role="alert"></div>
+            <button type="submit" class="btn btn--primary btn--block formSubmit">
+              <span class="formSubmit__label">Buyurtmani yuborish</span>
+              <span class="spinner hidden" aria-hidden="true"></span>
+            </button>
+            <p class="form-note">Tugmani bosish orqali siz operator qo'ng'irog'iga rozilik bildirasiz.</p>
+          </form>
+
+          <div id="successPane" class="successPane hidden">
+            <div class="successPane__ic" aria-hidden="true">✓</div>
+            <h3 class="successPane__title">Buyurtmangiz qabul qilindi!</h3>
+            <p class="successPane__text">Operatorimiz tez orada siz bilan bog'lanib, buyurtmani tasdiqlaydi. To'lov qurilmani qabul qilganingizda amalga oshiriladi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--alt" id="faq">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow eyebrow--violet">Savol-javob</span>
+          <h2 class="section__title">Ko'p so'raladigan savollar</h2>
+        </div>
+        <div class="faq reveal">
+          <details class="faq__item">
+            <summary>Qurilma qanday ishlaydi?</summary>
+            <p>Qurilma rozetkaga ulanadi va inson qulog'i sezmaydigan ultratovush chiqaradi. Bu zararkunandalar uchun noqulay muhit yaratadi.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Inson va uy hayvonlariga zararlimi?</summary>
+            <p>Qurilma kimyoviy moddalar ishlatmaydi. Tovush odatda inson qulog'iga sezilmaydi. Uy hayvonlari xatti-harakatini kuzatib borishni tavsiya qilamiz.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Natija qachon ko'rinadi?</summary>
+            <p>Natija xonaning kattaligi va sharoitga bog'liq. Qurilmani doimiy yoqilgan holatda qoldirish tavsiya etiladi.</p>
+          </details>
+          <details class="faq__item">
+            <summary>To'lovni qanday amalga oshiraman?</summary>
+            <p>Oldindan to'lov kerak emas. To'lov qurilmani qabul qilganingizda amalga oshiriladi.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Bir nechta xona uchun nechta qurilma kerak?</summary>
+            <p>Har bir asosiy xona uchun alohida qurilma tavsiya etiladi, chunki devorlar tovushni susaytiradi.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Buyurtmani qanday beraman?</summary>
+            <p>Yuqoridagi formaga ism va telefon raqamingizni kiriting. Operator siz bilan bog'lanadi.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section finalcta">
+      <div class="container finalcta__inner reveal">
+        <h2 class="finalcta__title">Uyingizni bugun himoya qiling</h2>
+        <p class="finalcta__sub">Yetkazib berilganda to'laysiz — xavfsiz va qulay.</p>
+        <button class="btn btn--primary btn--lg" data-scrollto="#form" data-track="hero_cta_click">Buyurtma berish — 125 000 so'm</button>
       </div>
     </section>
   </main>
 
-  <script src="/assets/app.js"></script>
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="brand brand--footer">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">Pest Repeller</span>
+      </div>
+      <p class="footer__text">Ultratovushli zararkunanda qaytargich. To'lov yetkazib berilganda.</p>
+      <p class="footer__copy">© 2026 Pest Repeller. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+  <!-- STICKY MOBILE BAR -->
+  <div class="sticky-bar">
+    <div class="sticky-bar__info">
+      <img src="/assets/product-master.png" alt="" class="sticky-bar__thumb" width="36" height="36" />
+      <span class="sticky-bar__price">125 000 so'm</span>
+    </div>
+    <button class="btn btn--primary btn--sm" data-scrollto="#form" data-track="hero_cta_click">Buyurtma berish</button>
+  </div>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  </script>
+  <script src="/assets/app.js" defer></script>
 </body>
 </html>

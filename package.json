@@ -10,6 +10,6 @@
     "db:apply:remote": "wrangler d1 execute savdomix_audit --remote --file=./schema/d1.sql"
   },
   "devDependencies": {
-    "wrangler": "^3.78.0"
+    "wrangler": "^3.114.17"
   }
 }
