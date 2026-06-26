@@ -60,6 +60,11 @@ async function buildUserData(params, env) {
   if (firstName) userData.fn = [await capiHashName(firstName)];
   if (isValidFbp(fbp)) userData.fbp = fbp;
   if (isValidFbc(fbc)) userData.fbc = fbc;
+  // If no valid fbc but we have a raw fbclid, rebuild fbc (recovers click attribution).
+  if (!userData.fbc && params.fbclid) {
+    const rebuilt = `fb.1.${Date.now()}.${String(params.fbclid).slice(0, 256)}`;
+    if (isValidFbc(rebuilt)) userData.fbc = rebuilt;
+  }
 
   const extId = await capiHashExternalId(externalId);
   if (extId) userData.external_id = [extId];

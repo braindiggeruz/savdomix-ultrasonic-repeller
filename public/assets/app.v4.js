@@ -2,8 +2,8 @@
 // All API calls hit /api/* (Cloudflare Pages Functions).
 //
 // Meta event contract (production semantics):
-//   PageView          : once on load
-//   ViewContent       : once on load
+//   PageView          : once on load (browser + server CAPI, same event_id dedup)
+//   ViewContent       : once on load (browser + server CAPI, same event_id dedup)
 //   Hero CTA          : custom 'HeroCTA_Click' only — NO InitiateCheckout
 //   invalid submit    : NO InitiateCheckout
 //   valid name+phone  : exactly one InitiateCheckout (browser) + server CAPI
@@ -85,6 +85,7 @@
         attrs: {
           _fbp: (leadBody.attrs && leadBody.attrs._fbp) || null,
           _fbc: (leadBody.attrs && leadBody.attrs._fbc) || null,
+          fbclid: (leadBody.attrs && leadBody.attrs.fbclid) || null,
           landing_url: (leadBody.attrs && leadBody.attrs.landing_url) || window.location.href,
         },
       });
@@ -96,11 +97,43 @@
   const FIRED = { PageView: false, ViewContent: false, InitiateCheckout: false, Lead: false };
   let CONFIG = { pixel_id: "2935651803447339", value: 125000, currency: "UZS", content_name: "Ultratovushli zararkunanda qaytargich", content_id: "ultrasonic-repeller-v1", mock_mode: false };
 
-  function pixelInit() { if (!window.fbq) return; if (!window.__fbq_inited__) { fbq("init", CONFIG.pixel_id); window.__fbq_inited__ = true; } }
-  function firePageView() { if (FIRED.PageView || !window.fbq) return; pixelInit(); fbq("track", "PageView"); FIRED.PageView = true; }
+  function pixelInit() {
+    if (!window.fbq) return;
+    if (!window.__fbq_inited__) {
+      // Advanced Matching: pass external_id + country so the browser pixel sends
+      // extra identity signals (Meta hashes these automatically). Raises match quality.
+      var am = {};
+      try { var xid = getExternalId(); if (xid) am.external_id = xid; } catch {}
+      am.country = "uz";
+      try { fbq("init", CONFIG.pixel_id, am); } catch { fbq("init", CONFIG.pixel_id); }
+      window.__fbq_inited__ = true;
+    }
+  }
+  // Mirror a top-funnel event to server CAPI with the SAME event_id (dedup).
+  function sendServerEvent(eventName, eventId) {
+    try {
+      var attrs = getAttrs();
+      var payload = JSON.stringify({
+        event_name: eventName,
+        client_event_id: eventId,
+        external_id: getExternalId(),
+        attrs: { _fbp: attrs._fbp || null, _fbc: attrs._fbc || null, fbclid: attrs.fbclid || null, landing_url: attrs.landing_url || window.location.href },
+      });
+      fetch("/api/track-event", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true, credentials: "same-origin" }).catch(function () {});
+    } catch {}
+  }
+  function firePageView() {
+    if (FIRED.PageView || !window.fbq) return; pixelInit();
+    var eid = uuidv4();
+    fbq("track", "PageView", {}, { eventID: eid });
+    sendServerEvent("PageView", eid);
+    FIRED.PageView = true;
+  }
   function fireViewContent() {
     if (FIRED.ViewContent || !window.fbq) return; pixelInit();
-    fbq("track", "ViewContent", { content_name: CONFIG.content_name, content_category: "home_appliance", content_ids: [CONFIG.content_id], content_type: "product", value: CONFIG.value, currency: CONFIG.currency });
+    var eid = uuidv4();
+    fbq("track", "ViewContent", { content_name: CONFIG.content_name, content_category: "home_appliance", content_ids: [CONFIG.content_id], content_type: "product", value: CONFIG.value, currency: CONFIG.currency }, { eventID: eid });
+    sendServerEvent("ViewContent", eid);
     FIRED.ViewContent = true;
   }
   function fireHeroCtaCustom() { if (!window.fbq) return; fbq("trackCustom", "HeroCTA_Click"); }

@@ -166,6 +166,7 @@ export const onRequestPost = async ({ request, env }) => {
       clientUa: ua,
       fbp: typeof attrs._fbp === "string" ? attrs._fbp : null,
       fbc: typeof attrs._fbc === "string" ? attrs._fbc : null,
+      fbclid: typeof attrs.fbclid === "string" ? attrs.fbclid : null,
       phoneCanonical,
       firstName: nameCheck.value.split(/\s+/)[0],
       externalId: (payload.external_id || "").toString() || null,
