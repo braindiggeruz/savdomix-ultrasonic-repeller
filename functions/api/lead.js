@@ -168,6 +168,8 @@ export const onRequestPost = async ({ request, env }) => {
       fbc: typeof attrs._fbc === "string" ? attrs._fbc : null,
       phoneCanonical,
       firstName: nameCheck.value.split(/\s+/)[0],
+      orderValue: payload.order_value,
+      quantity: payload.quantity,
     }, env);
     // Best-effort update audit row
     await insertAuditRow(env, {
