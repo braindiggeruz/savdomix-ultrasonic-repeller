@@ -168,6 +168,8 @@ export const onRequestPost = async ({ request, env }) => {
       fbc: typeof attrs._fbc === "string" ? attrs._fbc : null,
       phoneCanonical,
       firstName: nameCheck.value.split(/\s+/)[0],
+      externalId: (payload.external_id || "").toString() || null,
+      country: "uz",
       orderValue: payload.order_value,
       quantity: payload.quantity,
     }, env);
