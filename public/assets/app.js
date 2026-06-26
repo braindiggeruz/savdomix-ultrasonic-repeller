@@ -118,18 +118,11 @@
   const fmt = (n) => new Intl.NumberFormat("ru-RU").format(n).replace(/,/g, " ");
 
   // --- quantity state ---
-  let selectedQty = 1, selectedPrice = 125000;
-  function bindQty() {
-    $$("#qtys .qty").forEach((q) => {
-      q.addEventListener("click", () => {
-        $$("#qtys .qty").forEach((x) => x.classList.remove("sel"));
-        q.classList.add("sel");
-        selectedQty = parseInt(q.dataset.qty, 10);
-        selectedPrice = parseInt(q.dataset.price, 10);
-        const cp = $("#cardPrice"); if (cp) cp.textContent = fmt(selectedPrice) + " so'm";
-      });
-    });
-  }
+  // Single confirmed SKU only: 1 unit = 125 000 UZS. Bundles 2/3 are NOT a
+  // confirmed BUYO offer (BUYO receives no quantity/value), so they are disabled.
+  const SELECTED_QTY = 1, SELECTED_PRICE = 125000;
+  let selectedQty = SELECTED_QTY, selectedPrice = SELECTED_PRICE;
+  function bindQty() { /* no-op: quantity locked to 1 */ }
 
   // --- multi-step ---
   let formStartFired = false;
@@ -171,8 +164,8 @@
       const body = {
         name: nameCheck.value,
         phone: "+" + phoneCheck.value,
-        quantity: selectedQty,
-        order_value: selectedPrice,
+        quantity: SELECTED_QTY,
+        order_value: SELECTED_PRICE,
         attrs: {
           utm_source: attrs.utm_source || null, utm_medium: attrs.utm_medium || null,
           utm_campaign: attrs.utm_campaign || null, utm_term: attrs.utm_term || null, utm_content: attrs.utm_content || null,

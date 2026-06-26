@@ -5,17 +5,18 @@
 import { capiHashName, capiHashPhone, uaHash } from "./hash.js";
 import { isValidFbc, isValidFbp } from "./attribution.js";
 
-// Allowed bundle values (so'm) — server-side guard. Never trust client value blindly.
-const ALLOWED_ORDER_VALUES = new Set([125000, 225000, 315000]);
+// Only the single confirmed SKU is allowed (1 unit = 125 000 UZS).
+// Bundles 2/3 are NOT a confirmed BUYO offer, so any other value is rejected
+// and forced back to the confirmed single-unit price/quantity.
+const ALLOWED_ORDER_VALUES = new Set([125000]);
 
-// Resolve a trusted (value, quantity) pair from client-provided hints.
-// Falls back to the single-unit default if the hint is missing/invalid.
+// Resolve a trusted (value, quantity) pair. Always forces 1 unit @ confirmed price
+// regardless of client-provided hints — server is the source of truth.
 export function resolveOrderValue(orderValue, quantity, env) {
   const defaultValue = Number.parseInt(env.PRODUCT_VALUE_UZS || "125000", 10) || 125000;
   const v = Number.parseInt(orderValue, 10);
-  const q = Number.parseInt(quantity, 10);
   if (ALLOWED_ORDER_VALUES.has(v)) {
-    return { value: v, quantity: q >= 1 && q <= 3 ? q : 1 };
+    return { value: v, quantity: 1 };
   }
   return { value: defaultValue, quantity: 1 };
 }
