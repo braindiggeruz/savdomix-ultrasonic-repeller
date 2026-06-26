@@ -3,7 +3,7 @@
 # Do NOT put secrets in this file. Configure them via Cloudflare dashboard or
 # `wrangler pages secret put` (server-side only).
 
-name = "savdomix-ultrasonic-repeller"
+name = "savdomix-ultrasonic-repeller-v2"
 pages_build_output_dir = "public"
 compatibility_date = "2026-06-26"
 compatibility_flags = ["nodejs_compat"]
