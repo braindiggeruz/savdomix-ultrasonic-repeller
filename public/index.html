@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="/assets/product-hero.v4.webp" fetchpriority="high" />
   <link rel="stylesheet" href="/assets/styles.v5.css" />
-  <link rel="stylesheet" href="/assets/conversion.v3.css" />
+  <link rel="stylesheet" href="/assets/conversion.v4.css" />
 
   <script type="application/ld+json">
   {
@@ -96,6 +96,77 @@
       </div>
     </div>
 
+    <!-- ORDER (moved right after hero: minimal scroll to the lead form) -->
+    <section class="section order" id="order">
+      <div class="container">
+        <div class="order__grid">
+          <div class="order__intro reveal">
+            <span class="eyebrow"><span class="dot"></span> Buyurtma</span>
+            <h2>Bugun Savdomix buyurtma qiling</h2>
+            <p>Ism va telefon qoldiring — 15 daqiqada qo'ng'iroq qilib buyurtmani tasdiqlaymiz va bepul yetkazib beramiz. To'lovni faqat olganda qilasiz.</p>
+            <ul class="order-facts">
+              <li><span class="k">Narx</span><span class="v">125 000 so'm</span></li>
+              <li><span class="k">Yetkazish</span><span class="v">O'zbekiston bo'ylab bepul</span></li>
+              <li><span class="k">To'lov</span><span class="v">Yetkazib berilganda</span></li>
+              <li><span class="k">Oldindan to'lov</span><span class="v">Kerak emas</span></li>
+            </ul>
+            <div class="guarantee-card">
+              <span class="g-ic">🛡️</span>
+              <div><b>30 kun kafolat.</b><p>Yoqmadi yoki yordam bermadimi — 30 kun ichida pulni savolsiz qaytaramiz. Siz hech narsa yo'qotmaysiz.</p></div>
+            </div>
+          </div>
+
+          <div class="formCard reveal">
+            <div class="formCard__head">
+              <img src="/assets/product-hero.v4.jpg" alt="Savdomix" class="formCard__thumb" width="56" height="56" loading="lazy" />
+              <div>
+                <div class="formCard__name">Savdomix qaytargich</div>
+                <div class="formCard__price"><span class="oldp">250 000</span><span class="new" id="cardPrice">125 000 so'm</span> <span class="disc">−50%</span></div>
+              </div>
+            </div>
+            <div class="formBody">
+              <div class="urgency urgency--form">⏰ Chegirma tugashiga: <b class="cd-time">--:--:--</b></div>
+              <!-- Single-step form: name + phone, nothing else -->
+              <form id="orderForm" novalidate>
+                <div class="summary">
+                  <span class="summary__k">1 dona × Savdomix</span>
+                  <span class="summary__v">125 000 so'm</span>
+                </div>
+                <div class="field">
+                  <label for="nameInput">Ismingiz</label>
+                  <input id="nameInput" name="name" type="text" autocomplete="name" placeholder="Ismingiz" required />
+                </div>
+                <div class="field">
+                  <label for="phoneInput">Telefon raqamingiz</label>
+                  <div class="phone"><span class="phone__prefix">+998</span><input id="phoneInput" name="phone" type="tel" autocomplete="tel" inputmode="numeric" placeholder="90 123 45 67" required /></div>
+                  <small class="field__hint">Operator shu raqamga qo'ng'iroq qiladi</small>
+                </div>
+                <div id="formError" class="form-error hidden" role="alert"></div>
+                <button type="submit" class="btn btn--primary btn--block btn--lg formSubmit">
+                  <span class="formSubmit__label">Buyurtmani tasdiqlash</span>
+                  <span class="spinner hidden" aria-hidden="true"></span>
+                </button>
+                <div class="stock">
+                  <div class="stock__row">
+                    <span class="left">Chegirmali partiyada <b id="stockNum">9</b> dona qoldi</span>
+                    <span class="sold">bugungi narxda</span>
+                  </div>
+                  <div class="stock__bar"><div class="stock__fill" id="stockFill"></div></div>
+                </div>
+                <p class="form-note">Tugmani bosish orqali siz operator qo'ng'irog'iga rozilik bildirasiz. To'lov — yetkazib berilganda.</p>
+              </form>
+
+              <div id="successPane" class="successPane hidden">
+                <div class="successPane__ic" aria-hidden="true">✓</div>
+                <h3 class="successPane__title">Buyurtma qabul qilindi!</h3>
+                <p class="successPane__text">15 daqiqa ichida tasdiqlash uchun qo'ng'iroq qilamiz. To'lov — yetkazishda.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PEST GRID -->
     <section class="section" id="pests">
       <div class="container">
@@ -149,94 +220,6 @@
           <div class="step"><div class="step__num">01</div><h3 class="step__title">Rozetkaga ulang</h3><p class="step__text">Qurilmani xonadagi rozetkaga to'g'ridan-to'g'ri ulang.</p></div>
           <div class="step"><div class="step__num">02</div><h3 class="step__title">Ultratovush tarqaladi</h3><p class="step__text">Qurilma zararkunandalar uchun noqulay muhit yaratadi.</p></div>
           <div class="step"><div class="step__num">03</div><h3 class="step__title">Xona tinchlanadi</h3><p class="step__text">Doimiy yoqilgan holatda qoldiring — uy himoyalanadi.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ORDER -->
-    <section class="section order" id="order">
-      <div class="container">
-        <div class="order__grid">
-          <div class="order__intro reveal">
-            <span class="eyebrow"><span class="dot"></span> Buyurtma</span>
-            <h2>Bugun Savdomix buyurtma qiling</h2>
-            <p>Ism va telefon qoldiring — 15 daqiqada qo'ng'iroq qilib buyurtmani tasdiqlaymiz va bepul yetkazib beramiz. To'lovni faqat olganda qilasiz.</p>
-            <ul class="order-facts">
-              <li><span class="k">Narx</span><span class="v">125 000 so'm</span></li>
-              <li><span class="k">Yetkazish</span><span class="v">O'zbekiston bo'ylab bepul</span></li>
-              <li><span class="k">To'lov</span><span class="v">Yetkazib berilganda</span></li>
-              <li><span class="k">Oldindan to'lov</span><span class="v">Kerak emas</span></li>
-            </ul>
-            <div class="guarantee-card">
-              <span class="g-ic">🛡️</span>
-              <div><b>30 kun kafolat.</b><p>Yoqmadi yoki yordam bermadimi — 30 kun ichida pulni savolsiz qaytaramiz. Siz hech narsa yo'qotmaysiz.</p></div>
-            </div>
-          </div>
-
-          <div class="formCard reveal">
-            <div class="formCard__head">
-              <img src="/assets/product-hero.v4.jpg" alt="Savdomix" class="formCard__thumb" width="56" height="56" loading="lazy" />
-              <div>
-                <div class="formCard__name">Savdomix qaytargich</div>
-                <div class="formCard__price"><span class="oldp">250 000</span><span class="new" id="cardPrice">125 000 so'm</span> <span class="disc">−50%</span></div>
-              </div>
-            </div>
-            <div class="formBody">
-              <div class="urgency urgency--form">⏰ Chegirma tugashiga: <b class="cd-time">--:--:--</b></div>
-              <!-- STEP 1: quantity -->
-              <div id="step1">
-                <div class="stepline"><span class="stepDot on">1</span><span class="on">Miqdorni tanlang</span><span class="bar"></span><span class="stepDot">2</span></div>
-                <div class="qtys" id="qtys">
-                  <div class="qty sel" data-qty="1" data-price="125000">
-                    <span class="qty__radio"></span>
-                    <div class="qty__main"><div class="qty__title">1 dona</div><div class="qty__sub">Bitta xona uchun</div></div>
-                    <div class="qty__price">125 000</div>
-                  </div>
-                </div>
-                <div class="stock">
-                  <div class="stock__row">
-                    <span class="left">Chegirmali partiyada <b id="stockNum">9</b> dona qoldi</span>
-                    <span class="sold">bugungi narxda</span>
-                  </div>
-                  <div class="stock__bar"><div class="stock__fill" id="stockFill"></div></div>
-                </div>
-                <button type="button" class="btn btn--primary btn--block btn--lg" id="toStep2" style="margin-top:16px">Keyingi</button>
-              </div>
-
-              <!-- STEP 2: contacts -->
-              <form id="orderForm" class="hidden" novalidate>
-                <div class="stepline"><span class="stepDot on">1</span><span>Miqdor</span><span class="bar" style="background:var(--orange)"></span><span class="stepDot on">2</span><span class="on">Ma'lumotlar</span></div>
-                <div class="summary">
-                  <span class="summary__k"><span id="sumQty">1</span> dona × Savdomix</span>
-                  <span class="summary__v" id="sumTotal">125 000 so'm</span>
-                </div>
-                <div class="field">
-                  <label for="nameInput">Ismingiz</label>
-                  <input id="nameInput" name="name" type="text" autocomplete="name" placeholder="Ismingiz" required />
-                </div>
-                <div class="field">
-                  <label for="phoneInput">Telefon raqamingiz</label>
-                  <div class="phone"><span class="phone__prefix">+998</span><input id="phoneInput" name="phone" type="tel" autocomplete="tel" inputmode="numeric" placeholder="90 123 45 67" required /></div>
-                  <small class="field__hint">Operator shu raqamga qo'ng'iroq qiladi</small>
-                </div>
-                <div id="formError" class="form-error hidden" role="alert"></div>
-                <div class="formActions">
-                  <button type="button" class="btn btn--ghost" id="backStep1">Orqaga</button>
-                  <button type="submit" class="btn btn--primary btn--block formSubmit">
-                    <span class="formSubmit__label">Buyurtmani tasdiqlash</span>
-                    <span class="spinner hidden" aria-hidden="true"></span>
-                  </button>
-                </div>
-                <p class="form-note">Tugmani bosish orqali siz operator qo'ng'irog'iga rozilik bildirasiz.</p>
-              </form>
-
-              <div id="successPane" class="successPane hidden">
-                <div class="successPane__ic" aria-hidden="true">✓</div>
-                <h3 class="successPane__title">Buyurtma qabul qilindi!</h3>
-                <p class="successPane__text">15 daqiqa ichida tasdiqlash uchun qo'ng'iroq qilamiz. To'lov — yetkazishda.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -323,7 +306,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
   </script>
-  <script src="/assets/app.v4.js" defer></script>
+  <script src="/assets/app.v5.js" defer></script>
   <script src="/assets/conversion.v3.js" defer></script>
 </body>
 </html>
