@@ -22,6 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="/assets/product-hero.v4.webp" fetchpriority="high" />
   <link rel="stylesheet" href="/assets/styles.v5.css" />
+  <link rel="stylesheet" href="/assets/conversion.v1.css" />
 
   <script type="application/ld+json">
   {
@@ -39,7 +40,7 @@
     <div class="container nav__inner">
       <a class="brand" href="#top" aria-label="Savdomix"><span class="brand__mark" aria-hidden="true"></span><span>Savdomix</span></a>
       <div class="nav__right">
-        <span class="nav__price">125 000 so'm</span>
+        <span class="nav__price"><s class="nav__old">250 000</s>125 000 so'm</span>
         <button class="btn btn--primary btn--sm" data-scrollto="#order" data-track="hero_cta_click">Buyurtma berish</button>
       </div>
     </div>
@@ -59,8 +60,11 @@
           <h1 class="hero__title">Hasharot va sichqonlardan <span class="hl">xoli uy</span></h1>
           <p class="hero__lead">Savdomix ultratovushli qaytargich rozetkaga ulanadi — chivin, tarakan, sichqon va boshqa zararkunandalar uydan uzoqlashadi. Zahar, sprey va yoqimsiz hidsiz. Bolalar va uy hayvonlari uchun xavfsiz.</p>
           <div class="hero__price">
+            <span class="old">250 000 so'm</span>
             <span class="new">125 000</span><span class="cur">so'm</span>
+            <span class="disc">−50%</span>
           </div>
+          <div class="urgency">🔥 Aksiya bugungina! Tugashiga: <b class="cd-time">--:--:--</b></div>
           <div class="hero__cta">
             <button class="btn btn--primary btn--lg" data-scrollto="#order" data-track="hero_cta_click">Buyurtma berish</button>
           </div>
@@ -174,10 +178,11 @@
               <img src="/assets/product-hero.v4.jpg" alt="Savdomix" class="formCard__thumb" width="56" height="56" loading="lazy" />
               <div>
                 <div class="formCard__name">Savdomix qaytargich</div>
-                <div class="formCard__price"><span class="new" id="cardPrice">125 000 so'm</span></div>
+                <div class="formCard__price"><span class="oldp">250 000</span><span class="new" id="cardPrice">125 000 so'm</span> <span class="disc">−50%</span></div>
               </div>
             </div>
             <div class="formBody">
+              <div class="urgency urgency--form">⏰ Chegirma tugashiga: <b class="cd-time">--:--:--</b></div>
               <!-- STEP 1: quantity -->
               <div id="step1">
                 <div class="stepline"><span class="stepDot on">1</span><span class="on">Miqdorni tanlang</span><span class="bar"></span><span class="stepDot">2</span></div>
@@ -187,6 +192,13 @@
                     <div class="qty__main"><div class="qty__title">1 dona</div><div class="qty__sub">Bitta xona uchun</div></div>
                     <div class="qty__price">125 000</div>
                   </div>
+                </div>
+                <div class="stock">
+                  <div class="stock__row">
+                    <span class="left">Chegirmali partiyada <b id="stockNum">9</b> dona qoldi</span>
+                    <span class="sold">bugungi narxda</span>
+                  </div>
+                  <div class="stock__bar"><div class="stock__fill" id="stockFill"></div></div>
                 </div>
                 <button type="button" class="btn btn--primary btn--block btn--lg" id="toStep2" style="margin-top:16px">Keyingi</button>
               </div>
@@ -298,7 +310,7 @@
   <div class="sticky-bar">
     <div class="sticky-bar__info">
       <img src="/assets/product-hero.v4.jpg" alt="" class="sticky-bar__thumb" width="38" height="38" loading="lazy" />
-      <span class="sticky-bar__price"><span class="new">125 000 so'm</span></span>
+      <span class="sticky-bar__price"><span class="oldp">250 000</span><span class="new">125 000 so'm</span></span>
     </div>
     <button class="btn btn--primary btn--sm" data-scrollto="#order" data-track="hero_cta_click">Buyurtma</button>
   </div>
@@ -312,5 +324,6 @@
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
   </script>
   <script src="/assets/app.v4.js" defer></script>
+  <script src="/assets/conversion.v1.js" defer></script>
 </body>
 </html>
